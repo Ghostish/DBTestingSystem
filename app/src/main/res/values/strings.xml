@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">DBTesingSystem</string>
+    <string name="hint_username">用户名</string>
+    <string name="hint_password">密码</string>
+    <string name="tap_to_login">登录</string>
+    <string name="start_test">开始考试</string>
+    <string name="show_result">查看成绩</string>
+    <string name="welcome">欢迎进入数据库考试系统</string>
+    <string name="mark_papers">批改考试</string>
+    <string name="answer_here">你的答案</string>
+    <string name="submit">交卷</string>
+    <string name="label_name">姓名：</string>
+    <string name="label_sno">学号：</string>
+    <string name="label_grade_sum">总分：</string>
+    <string name="title_view_grade">查看成绩</string>
+    <string name="label_paper_id">试卷编号：</string>
+    <string name="hint_gotoPage">跳转到</string>
+    <string name="label_time_last">剩余时间 :</string>
+    <string name="error_login">用户名或者密码不正确</string>
+    <string name="label_student">同学:</string>
+    <string name="label_create_time">创建日期：</string>
+    <string name="title_choose_paper">请选择一门考试</string>
+    <string name="message_loading">请稍后</string>
+    <string name="label_grade_choice">选择题：</string>
+    <string name="label_grade_gap">填空题：</string>
+    <string name="label_grade_essay">简答题</string>
+    <string name="cancel_button">取消</string>
+    <string name="ok_button">确认</string>
+    <string name="submit_alert_msg">确认交卷吗？</string>
+    <string name="title_quit">确认退出</string>
+    <string name="msg_quit_test">如果退出，所有作答都不会被保存</string>
+    <string name="toast_times_up">考试时间到</string>
+    <string name="title_logout">确认登出</string>
+    <string name="msg_logout">登出后你的需要重新登陆</string>
+</resources>

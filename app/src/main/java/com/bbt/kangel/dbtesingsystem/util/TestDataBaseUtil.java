@@ -1,0 +1,80 @@
+package com.bbt.kangel.dbtesingsystem.util;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+/**
+ * Created by Kangel on 2015/12/13.
+ */
+public class TestDataBaseUtil {
+    static final int STUDENT = 0, TEACHER = 1;
+
+    public static Cursor getPeopleList(SQLiteDatabase db, int type) {
+        switch (type) {
+            case STUDENT:
+                return db.rawQuery("select * from students", null);
+            case TEACHER:
+                return db.rawQuery("select * from teachers", null);
+            default:
+                return null;
+        }
+    }
+
+    public static Cursor getPaperList(SQLiteDatabase db) {
+        return db.rawQuery("select * from papers order by PID", null);
+    }
+
+    /*return a cursor with column SNO,SNAME,PID,GRADE*/
+    public static Cursor getGrade(SQLiteDatabase db, String SNO) {
+        if (SNO != null) {
+            return db.rawQuery("select grades.SNO SNO,SNAME,PID,GRADE from grades ,students where grades.SNO = ? and grades.SNO = students.SNO", new String[]{SNO});
+        } else {
+            return db.rawQuery("select grades.SNO SNO,SNAME,PID,GRADE from grades ,students where grades.SNO = students.SNO", null);
+        }
+    }
+
+    public static Cursor getGradeDetail(SQLiteDatabase db, String SNO){
+        /*int [] result = new int[3];
+        Cursor c = db.rawQuery("select sum(SCORE) SUM from choiceAnswers where SNO = ? and PID = ?",new String[]{SNO,1 + ""});
+        c.moveToPosition(0);
+        result[0] = c.getInt(c.getColumnIndex("SUM"));
+        c.close();
+        c = db.rawQuery("select sum(SCORE) SUM from gapAnswers where SNO = ? and PID = ?",new String[]{SNO,1 + ""});
+        c.moveToPosition(0);
+        result[1] = c.getInt(c.getColumnIndex("SUM"));
+        c.close();
+        c = db.rawQuery("select sum(SCORE) SUM from essayAnswers where SNO = ? and PID = ?",new String[]{SNO,1 + ""});
+        c.moveToPosition(0);
+        result[2] = c.getInt(c.getColumnIndex("SUM"));
+        c.close();*/
+       // return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore,gapScore,essayScore where choiceScore.SNO = ? and gapScore.SNO = ? and essayScore.SNO = ? and choiceScore.PID = gapScore.PID and choiceScore.PID = essayScore.PID",new String[]{SNO,SNO,SNO});
+        return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore  left join gapScore on choiceScore.PID = gapScore.PID left join essayScore on essayScore.PID = gapScore.PID where choiceScore.SNO = ? ",new String[]{SNO});
+    }
+    /*返回一张考卷的具体内容
+    * 返回的是一个包含三个游标的游标数组，
+    * 第一个是选择题游标，包含每道选择题的绝对题号，题目内容，分别四个选项的具体内容，标准答案，以及在该试卷中的分值
+    * 第二个是填空题游标，包含每道填空题的绝对题号，题目内容，参考答案，以及在该试卷中的分值
+    * 第三个是简答题游标，列的内容和填空题相似*/
+    public static Cursor[] getPaperDetail(SQLiteDatabase db, int PID) {
+        Cursor[] c = new Cursor[3];
+        String [] selectionArg = new String[]{PID + ""};
+        c[0] =db.rawQuery("select choiceQuestion.QID QID,CONTENT,CHOICEA,CHOICEB,CHOICEC,CHOICED,ANSWER,SCORE from choiceQuestion,choiceInPapers where PID = ? and choiceQuestion.QID = choiceInPapers.PID",selectionArg);
+        c[1]=db.rawQuery("select gapQuestion.QID QID,CONTENT,ANSWER,SCORE from gapQuestion,gapInPapers where PID = ? and gapQuestion.QID = gapInPapers.QID",selectionArg);
+        c[2]=db.rawQuery("select essayQuestion.QID QID,CONTENT,ANSWER,SCORE from essayQuestion,essayInPapers where PID = ? and essayQuestion.QID = essayInPapers.QID",selectionArg);
+        return c;
+    }
+
+    /*返回学生的作答信息
+    * 其中选择题包含每题的绝对题号，题目内容，分别四个选项的内容，学生给出的答案，以及系统对这一题的给分。
+    * 其中填空题,简答题包含每题的绝对题号，题目内容，学生的给出的答案，以及老师对这一题的评分,score 为-1 表示尚未评分*/
+    public static Cursor[] getStudentAnswerDetail(SQLiteDatabase db , String SNO,int PID){
+        Cursor [] c = new Cursor[3];
+        String [] selectionArgs = new String[]{SNO,PID + ""};
+        c[0] = db.rawQuery("select choiceQuestion.QID QID,CONTENT,CHOICEA,CHOICEB,CHOICEC,CHOICED,choiseAnswers.ANSWER,SCORE from choiseAnswers ,choiceInPapers where SNO = ? and PID = ? and choiseAnswers.QID = choiceQuestion.QID",selectionArgs);
+        c[1] = db.rawQuery("select gapQuestion.QID QID,CONTENT,gapAnswers.ANSWER,SCORE from gapAnswers,gapQuestion where SNO = ? and PID = ? and gapAnswers.QID = gapQuestion.QID",selectionArgs);
+        c[2] = db.rawQuery("select essayQuestion.QID QID,CONTENT,essayAnswers.ANSWER,SCORE from essayAnswers,essayQuestion where SNO = ? and PID = ? and essayAnswers.QID = essayQuestion.QID",selectionArgs);
+        return c;
+    }
+
+}
