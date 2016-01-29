@@ -1,11 +1,8 @@
 package fragment;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +13,7 @@ import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.util.TestDataBaseUtil;
 import com.bbt.kangel.dbtesingsystem.util.mDataBaseHelper;
 
-import adapter.ViewPaperListAdapter;
+import com.bbt.kangel.dbtesingsystem.adapter.ViewPaperListAdapter;
 
 /**
  * Created by Kangel on 2015/12/14.

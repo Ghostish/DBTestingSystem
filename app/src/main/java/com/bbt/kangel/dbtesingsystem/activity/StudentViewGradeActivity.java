@@ -10,7 +10,7 @@ import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.util.TestDataBaseUtil;
 import com.bbt.kangel.dbtesingsystem.util.mDataBaseHelper;
 
-import adapter.StudentViewGradeAdapter;
+import com.bbt.kangel.dbtesingsystem.adapter.StudentViewGradeAdapter;
 
 /**
  * Created by Kangel on 2015/12/15.

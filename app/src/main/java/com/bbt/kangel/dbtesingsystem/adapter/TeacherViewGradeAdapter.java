@@ -1,4 +1,4 @@
-package adapter;
+package com.bbt.kangel.dbtesingsystem.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
