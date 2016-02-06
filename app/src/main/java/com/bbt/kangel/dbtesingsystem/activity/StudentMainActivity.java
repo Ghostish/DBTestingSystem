@@ -1,20 +1,19 @@
 package com.bbt.kangel.dbtesingsystem.activity;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.util.DialogActivity;
-import com.bbt.kangel.dbtesingsystem.util.mDataBaseHelper;
 
-import fragment.ConfirmAlertDialogFragment;
-import fragment.SelectPaperDialogFragment;
+import com.bbt.kangel.dbtesingsystem.fragment.ConfirmAlertDialogFragment;
+import com.bbt.kangel.dbtesingsystem.fragment.SelectPaperDialogFragment;
 
 public class StudentMainActivity extends AppCompatActivity implements View.OnClickListener,DialogActivity{
 
@@ -25,7 +24,7 @@ public class StudentMainActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
         TextView nameText = (TextView) findViewById(R.id.name);
-        SharedPreferences preferences = getSharedPreferences("preferences",MODE_PRIVATE);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String name = preferences.getString("name",null);
        if(name != null){
            nameText.setText(name);
@@ -38,8 +37,14 @@ public class StudentMainActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId()){
             case R.id.start_test:
                 // TODO: 2015/12/14 show a dialog to pick test
-                dialogFragment = new SelectPaperDialogFragment();
-                dialogFragment.show(getSupportFragmentManager(), "selectDialog");
+                if (dialogFragment == null) {
+                    dialogFragment = new SelectPaperDialogFragment();
+                    dialogFragment.show(getSupportFragmentManager(), "selectDialog");
+                    Log.d("dialog", "firstshow");
+                }else {
+                    dialogFragment.show(getSupportFragmentManager(), "selectDialog");
+                    Log.d("dialog","reshow");
+                }
                 break;
             case R.id.show_result:
                 // TODO: 2015/12/14 start an activity to show result
@@ -63,12 +68,21 @@ public class StudentMainActivity extends AppCompatActivity implements View.OnCli
     public void doAtPositiveButton(String tag) {
         switch (tag){
             case "logoutDialog":
-                SharedPreferences preferences = getSharedPreferences("preferences",MODE_PRIVATE);
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                 preferences.edit().putInt("LOGIN_TYPE",-1).apply();
+                Log.d("preferences", preferences.getInt("LOGIN_TYPE", -1) + "");
                 Intent intent = new Intent(this,LoginActivity.class);
                 startActivity(intent);
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onItemSelected(Bundle args) {
+        Intent intent = new Intent(StudentMainActivity.this, TestActivity.class);
+        intent.putExtras(args);
+        startActivity(intent);
+        dismissDialog();
     }
 }

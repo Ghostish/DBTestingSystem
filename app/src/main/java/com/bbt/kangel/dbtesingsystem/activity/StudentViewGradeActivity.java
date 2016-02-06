@@ -1,6 +1,7 @@
 package com.bbt.kangel.dbtesingsystem.activity;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +27,7 @@ public class StudentViewGradeActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mDataBaseHelper helper = new mDataBaseHelper(this,"test.db",1);
-        String SNO = getSharedPreferences("preferences",MODE_PRIVATE).getString("ID",null);
+        String SNO = PreferenceManager.getDefaultSharedPreferences(this).getString("ID",null);
         StudentViewGradeAdapter adapter = new StudentViewGradeAdapter(this, TestDataBaseUtil.getGradeDetail(helper.getReadableDatabase(),SNO));
         recyclerView.setAdapter(adapter);
     }

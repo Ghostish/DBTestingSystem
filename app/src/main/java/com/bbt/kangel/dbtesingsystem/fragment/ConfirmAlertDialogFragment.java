@@ -1,4 +1,4 @@
-package fragment;
+package com.bbt.kangel.dbtesingsystem.fragment;
 
 
 import android.app.Dialog;

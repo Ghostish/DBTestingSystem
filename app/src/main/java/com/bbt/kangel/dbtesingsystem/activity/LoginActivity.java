@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bbt.kangel.dbtesingsystem.R;
+import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.mDataBaseHelper;
 
 /**
@@ -30,17 +33,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Log.d("preferences",preferences.getInt("LOGIN_TYPE", -1) + "");
         if (preferences.getInt("LOGIN_TYPE", -1) != -1) {
             Intent intent = new Intent();
             switch (preferences.getInt("LOGIN_TYPE", -1)) {
-                case 0:
+                case GlobalKeeper.TYPE_STUDENT:
                     intent.setClass(this, StudentMainActivity.class);
                     break;
-                case 1:
+                case GlobalKeeper.TYPE_TEACHER:
                     intent.setClass(this, TeacherMainActivity.class);
                     break;
-                case 2:
+                case GlobalKeeper.TYPE_DEAN:
                     intent.setClass(this, DeanMainActivity.class);
                     break;
             }
@@ -75,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         c = db.rawQuery("select * from students where SNO = ? and PASSWORD = ?", selectionArgs);
                         if (c.getCount() == 1) {
                             /*write to sharePreferences to save user's info ,including user's type and user's ID(SNO,TNO,or DNO)*/
-                            SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putInt("LOGIN_TYPE", 0);
                             editor.putString("ID", selectionArgs[0]);
@@ -94,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         c = db.rawQuery("select * from teachers where TNO = ? and PASSWORD = ?", selectionArgs);
                         if (c.getCount() == 1) {
                             /*write to sharePreferences to save user's info ,including user's type and user's ID(SNO,TNO,or DNO)*/
-                            SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putInt("LOGIN_TYPE", 1);
                             editor.putString("ID", selectionArgs[0]);
@@ -113,7 +117,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         c = db.rawQuery("select * from teachers where DNO = ? and PASSWORD = ?", selectionArgs);
                         if (c.getCount() == 1) {
                             /*write to sharePreferences to save user's info ,including user's type and user's ID(SNO,TNO,or DNO)*/
-                            SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putInt("LOGIN_TYPE", 2);
                             editor.putString("ID", selectionArgs[0]);

@@ -32,4 +32,5 @@
     <string name="toast_times_up">考试时间到</string>
     <string name="title_logout">确认登出</string>
     <string name="msg_logout">登出后你的需要重新登陆</string>
+    <string name="paper_loading">正在准备试卷...</string>
 </resources>

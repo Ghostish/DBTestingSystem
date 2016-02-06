@@ -44,10 +44,11 @@ public class ViewPaperListAdapter extends RecyclerView.Adapter<ViewPaperListAdap
                     int pid = Integer.parseInt(holder.pidText.getText().toString());
                     Bundle bundle = new Bundle();
                     bundle.putInt("PID", pid);
-                    Intent intent = new Intent(context, TestActivity.class);
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
-                    ((DialogActivity) context).dismissDialog();
+                    /*context.startActivity(intent);
+                    ((DialogActivity) context).dismissDialog();*/
+                    if(context instanceof DialogActivity){
+                        ((DialogActivity) context).onItemSelected(bundle);
+                    }
                 }
             });
         }

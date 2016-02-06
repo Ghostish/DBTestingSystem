@@ -1,5 +1,6 @@
 package com.bbt.kangel.dbtesingsystem.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,14 +32,16 @@ import android.widget.Toast;
 
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.util.DialogActivity;
+import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.mDataBaseHelper;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import fragment.ConfirmAlertDialogFragment;
+import com.bbt.kangel.dbtesingsystem.fragment.ConfirmAlertDialogFragment;
 
 /**
  * Created by Kangel on 2015/12/12.
@@ -53,7 +57,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     private Timer timer = null;
     private TimerTask timerTask = null;
     static private Handler handler = null;
-    private final static int UPDATE_VIEW = 1;
+    private final static int UPDATE_VIEW = 221, COMMIT_FINISHED = 2121,PAPER_PREPARED = 1212;
     private int count = 5400;
     final static private int PERIOD = 1000;
     private TestAdapter mAdapter;
@@ -73,103 +77,126 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         if (bundle != null) {
             PID = bundle.getInt("PID");
         } else {
-            Log.i("error", "no valid paper id");
+            Log.e("error", "no valid paper id");
             this.finish();
         }
-        helper = new mDataBaseHelper(this, "test.db", 1);
-        db = helper.getWritableDatabase();
-        choiceCursor = db.rawQuery(SELECT_CHOICES, new String[]{PID + ""});
-        gapCursor = db.rawQuery(SELECT_GAPS, new String[]{PID + ""});
-        essayCursor = db.rawQuery(SELECT_ESSAY, new String[]{PID + ""});
-        choiceCount = choiceCursor.getCount();
-        gapCount = gapCursor.getCount();
-        essayCount = essayCursor.getCount();
-        timeLast = (TextView) findViewById(R.id.time_last_text);
+        handler = new mHandler(TestActivity.this);
+        progressDialog = new ProgressDialog(TestActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage(getResources().getString(R.string.paper_loading));
+        progressDialog.show();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                helper = new mDataBaseHelper(TestActivity.this, GlobalKeeper.DB_NAME, 1);
+                db = helper.getWritableDatabase();
+                choiceCursor = db.rawQuery(SELECT_CHOICES, new String[]{PID + ""});
+                gapCursor = db.rawQuery(SELECT_GAPS, new String[]{PID + ""});
+                essayCursor = db.rawQuery(SELECT_ESSAY, new String[]{PID + ""});
+                choiceCount = choiceCursor.getCount();
+                gapCount = gapCursor.getCount();
+                essayCount = essayCursor.getCount();
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(handler != null){
+                    Message message = Message.obtain(handler, PAPER_PREPARED);
+                    handler.sendMessage(message);
+                }
+            }
+        }).start();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(this);
-        TextView countText = (TextView) findViewById(R.id.count_text);
-        String countHint = "/" + (choiceCount + gapCount + essayCount);
-        countText.setText(countHint);
-        final EditText gotoEdit = (EditText) findViewById(R.id.goto_edit);
-        gotoEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    int toPage = Integer.parseInt(gotoEdit.getText().toString()) - 1;
-                    if (0 < toPage && toPage < choiceCount + gapCount + essayCount) {
-                        pager.setCurrentItem(toPage);
-                        return true;
+
+    }
+
+    static private class mHandler extends Handler {
+        private WeakReference<Activity> mActivity;
+
+        public mHandler(Activity mActivity) {
+            this.mActivity = new WeakReference<>(mActivity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case UPDATE_VIEW:
+                    // updateText();
+                    if (mActivity.get() instanceof TestActivity) {
+                        ((TestActivity) mActivity.get()).updateText();
                     }
-                }
-                return false;
+                    break;
+                case COMMIT_FINISHED:
+                    if (mActivity.get() instanceof TestActivity) {
+                        ((TestActivity) mActivity.get()).progressDialog.dismiss();
+                        ((TestActivity) mActivity.get()).timer.cancel();
+                        mActivity.get().finish();
+                    }
+                    break;
+                case PAPER_PREPARED:
+                    if (mActivity.get() instanceof TestActivity) {
+                        ((TestActivity) mActivity.get()).initPaperView();
+                        ((TestActivity) mActivity.get()).progressDialog.dismiss();
+                        ((TestActivity) mActivity.get()).startTimer();
+                    }
+                    break;
             }
-        });
-        pager = (ViewPager) findViewById(R.id.pager);
-        mAdapter = new TestAdapter(getSupportFragmentManager());
-        pager.setAdapter(mAdapter);
-        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                String currentPage = position + 1 + "";
-                gotoEdit.setText(currentPage);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                switch (msg.what) {
-                    case UPDATE_VIEW:
-                        updateText();
-                }
-            }
-        };
-        startTimer();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (choiceCursor != null) {
+        if (choiceCursor != null && !choiceCursor.isClosed()) {
             choiceCursor.close();
         }
-        if (gapCursor != null) {
+        if (gapCursor != null && !gapCursor.isClosed()) {
             gapCursor.close();
         }
-        if (essayCursor != null) {
+        if (essayCursor != null && !essayCursor.isClosed()) {
             essayCursor.close();
         }
-        if (db != null) {
+        if (db != null && db.isOpen()) {
             db.close();
         }
     }
 
     private void submitPaper() {
-        progressDialog = new ProgressDialog(TestActivity.this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage(getResources().getString(R.string.message_loading));
-        progressDialog.show();
-        if(mAdapter.getCount()!= mAdapter.getMapSize()){
-            db.delete("choiceAnswers"," SNO = ? and PID = ?",new String[]{getSNO(),getPID() + ""});
-            db.delete("gapAnswers"," SNO = ? and PID = ?",new String[]{getSNO(),getPID() + ""});
-            db.delete("essayAnswers"," SNO = ? and PID = ?",new String[]{getSNO(),getPID() + ""});
+      /*  progressDialog = new ProgressDialog(TestActivity.this);
+        progressDialog.setCancelable(false);*/
+        if (progressDialog != null) {
+            progressDialog.setMessage(getResources().getString(R.string.message_loading));
+            progressDialog.show();
         }
-        for (int i = 0; i < mAdapter.getCount(); i++) {
-            if (mAdapter.getFragment(i) != null) {
-                ((TestFragment) mAdapter.getFragment(i)).commitToDataBase();
+        if (mAdapter.getCount() != mAdapter.getMapSize()) {
+            db.delete("choiceAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
+            db.delete("gapAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
+            db.delete("essayAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < mAdapter.getCount(); i++) {
+                    if (mAdapter.getFragment(i) != null) {
+                        ((TestFragment) mAdapter.getFragment(i)).commitToDataBase();
+                    }
+                }
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (handler != null) {
+                    Message message = Message.obtain(handler, COMMIT_FINISHED);
+                    handler.sendMessage(message);
+                }
             }
-        }
-        progressDialog.dismiss();
+        }).start();
+        //progressDialog.dismiss();
     }
 
     private SQLiteDatabase getDataBase() {
@@ -182,7 +209,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
     private String getSNO() {
         if (SNO == null) {
-            SharedPreferences preferences = getSharedPreferences("preferences", MODE_PRIVATE);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             SNO = preferences.getString("ID", null);
         }
         return SNO;
@@ -192,6 +219,9 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         if (count == 0) {
             // TODO: 2015/12/14 alert the student and submit the paper
             Toast.makeText(TestActivity.this, getString(R.string.toast_times_up), Toast.LENGTH_SHORT).show();
+            if (timer != null) {
+                timer.cancel();
+            }
             submitPaper();
         }
         int h = count / 3600;
@@ -264,12 +294,17 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         switch (tag) {
             case "submitDialog":
                 submitPaper();
-                finish();
                 break;
             case "quitDialog":
+                timer.cancel();
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onItemSelected(Bundle args) {
+
     }
 
     private class TestAdapter extends FragmentStatePagerAdapter {
@@ -506,8 +541,48 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     break;
                 default:
-                    Log.i("error", "typeerror");
+                    Log.e("error", "typeerror");
             }
         }
+    }
+    private void initPaperView() {
+        timeLast = (TextView) findViewById(R.id.time_last_text);
+        TextView countText = (TextView) findViewById(R.id.count_text);
+        String countHint = "/" + (choiceCount + gapCount + essayCount);
+        countText.setText(countHint);
+        final EditText gotoEdit = (EditText) findViewById(R.id.goto_edit);
+        gotoEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    int toPage = Integer.parseInt(gotoEdit.getText().toString()) - 1;
+                    if (0 < toPage && toPage < choiceCount + gapCount + essayCount) {
+                        pager.setCurrentItem(toPage);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        pager = (ViewPager) findViewById(R.id.pager);
+        mAdapter = new TestAdapter(getSupportFragmentManager());
+        pager.setAdapter(mAdapter);
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                String currentPage = position + 1 + "";
+                gotoEdit.setText(currentPage);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }
