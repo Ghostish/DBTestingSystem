@@ -37,7 +37,7 @@ public class SelectPaperDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getDialog().setTitle(getActivity().getString(R.string.title_choose_paper));
+        //getDialog().setTitle(getActivity().getString(R.string.title_choose_paper));
         View v = inflater.inflate(R.layout.fragment_dialog_choose_paper, container, false);
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycle_view);
         recyclerView.setHasFixedSize(true);

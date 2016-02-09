@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Log.d("preferences",preferences.getInt("LOGIN_TYPE", -1) + "");
+        Log.d("preferences", preferences.getInt("LOGIN_TYPE", -1) + "");
         if (preferences.getInt("LOGIN_TYPE", -1) != -1) {
             Intent intent = new Intent();
             switch (preferences.getInt("LOGIN_TYPE", -1)) {
@@ -59,10 +59,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editUsername.addTextChangedListener(this);
         editPassword.addTextChangedListener(this);
         loginTextButton = (TextView) findViewById(R.id.login_button_text);
+        loginTextButton.setClickable(false);
         String[] roleArray = getResources().getStringArray(R.array.role_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, roleArray);
         spinner.setAdapter(adapter);
-        helper = new mDataBaseHelper(this, "test.db", 1);
+        helper = new mDataBaseHelper(this, GlobalKeeper.DB_NAME, 1);
 
     }
 

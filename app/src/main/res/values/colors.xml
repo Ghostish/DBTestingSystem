@@ -12,5 +12,6 @@
     <color name="RedcolorPrimary">#e08886</color>
     <color name="RedcolorPrimaryDark">#d34d4a</color>
     <color name="RedcolorPrimaryLight">#f0cac9</color>
+    <color name="lightGrey">#d3d3d3</color>
 
 </resources>

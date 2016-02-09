@@ -18,6 +18,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -31,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bbt.kangel.dbtesingsystem.R;
+import com.bbt.kangel.dbtesingsystem.fragment.GotoQuestionDialogFragment;
 import com.bbt.kangel.dbtesingsystem.util.DialogActivity;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.mDataBaseHelper;
@@ -57,7 +60,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     private Timer timer = null;
     private TimerTask timerTask = null;
     static private Handler handler = null;
-    private final static int UPDATE_VIEW = 221, COMMIT_FINISHED = 2121,PAPER_PREPARED = 1212;
+    private final static int UPDATE_VIEW = 221, COMMIT_FINISHED = 2121, PAPER_PREPARED = 1212;
     private int count = 5400;
     final static private int PERIOD = 1000;
     private TestAdapter mAdapter;
@@ -66,6 +69,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     private int PID;
     private String SNO;
     private ProgressDialog progressDialog;
+    private GotoQuestionDialogFragment gotoQuestionDialogFragment;
+    private boolean[] questionTested;
 
 
     @Override
@@ -97,11 +102,11 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 gapCount = gapCursor.getCount();
                 essayCount = essayCursor.getCount();
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(handler != null){
+                if (handler != null) {
                     Message message = Message.obtain(handler, PAPER_PREPARED);
                     handler.sendMessage(message);
                 }
@@ -186,7 +191,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -275,10 +280,25 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 fragment.show(getSupportFragmentManager(), "submitDialog");
             }
             break;
+            case R.id.goto_edit: {
+                if (gotoQuestionDialogFragment == null) {
+                    gotoQuestionDialogFragment = GotoQuestionDialogFragment.newInstance(questionTested);
+                }
+                gotoQuestionDialogFragment.show(getSupportFragmentManager(), "gotoQuestion");
+                break;
+            }
+            case R.id.question_num:
+                int nextPosition = Integer.parseInt(((TextView) v).getText().toString()) - 1;
+                gotoQuestionDialogFragment.dismiss();
+                pager.setCurrentItem(nextPosition, true);
+                break;
             default://for navigation button
             {
                 ConfirmAlertDialogFragment fragment = ConfirmAlertDialogFragment.newInstance(R.style.DialogStyle, getString(R.string.title_quit), getString(R.string.msg_quit_test));
                 fragment.show(getSupportFragmentManager(), "quitDialog");
+                /*boolean[] data = {false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false};
+                GotoQuestionDialogFragment gotoQuestionDialogFragment = GotoQuestionDialogFragment.newInstance(data);
+                gotoQuestionDialogFragment.show(getSupportFragmentManager(), "gotoQuestion");*/
             }
 
         }
@@ -321,6 +341,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 choiceCursor.moveToPosition(position);
                 Bundle bundle = new Bundle();
                 bundle.putInt("type", 0);
+                bundle.putInt("position", position);
                 bundle.putInt("QID", choiceCursor.getInt(choiceCursor.getColumnIndex("QID")));
                 bundle.putInt("score", choiceCursor.getInt(choiceCursor.getColumnIndex("SCORE")));
                 bundle.putString("answer", choiceCursor.getString(choiceCursor.getColumnIndex("ANSWER")));
@@ -334,6 +355,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 gapCursor.moveToPosition(position - choiceCount);
                 Bundle bundle = new Bundle();
                 bundle.putInt("type", 1);
+                bundle.putInt("position", position);
                 bundle.putInt("QID", gapCursor.getInt(gapCursor.getColumnIndex("QID")));
                 bundle.putString("content", gapCursor.getString(gapCursor.getColumnIndex("CONTENT")));
                 f = TestFragment.newInstance(bundle);
@@ -341,6 +363,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 essayCursor.moveToPosition(position - choiceCount - gapCount);
                 Bundle bundle = new Bundle();
                 bundle.putInt("type", 2);
+                bundle.putInt("position", position);
                 bundle.putInt("QID", essayCursor.getInt(essayCursor.getColumnIndex("QID")));
                 bundle.putString("content", essayCursor.getString(essayCursor.getColumnIndex("CONTENT")));
                 f = TestFragment.newInstance(bundle);
@@ -373,6 +396,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         int TYPE;
         int QID;
         int SCORE;
+        int position;
         Context context;
         String choiceAnswer;
         RadioGroup radioGroup;
@@ -398,6 +422,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             if (args != null) {
                 TYPE = args.getInt("type");
                 QID = args.getInt("QID");
+                position = args.getInt("position");
             } else {
                 TYPE = -1;
                 QID = -1;
@@ -425,18 +450,62 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     buttonB.setText(args.getString("choiceB"));
                     buttonC.setText(args.getString("choiceC"));
                     buttonD.setText(args.getString("choiceD"));
+                    radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup group, int checkedId) {
+                            if (getActivity() instanceof TestActivity) {
+                                ((TestActivity) getActivity()).questionTested[position] = true;
+                            }
+                        }
+                    });
                 }
                 break;
                 case GAP: {
                     v = inflater.inflate(R.layout.fragment_test_gap, container, false);
                     TextView content = (TextView) v.findViewById(R.id.content);
                     answerSheet = (TextView) v.findViewById(R.id.answer_sheet);
+                    answerSheet.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            if (getActivity() instanceof TestActivity) {
+                                ((TestActivity) getActivity()).questionTested[position] = !s.toString().isEmpty();
+                            }
+                        }
+                    });
                     content.setText(args.getString("content"));
                 }
                 break;
                 case ESSAY: {
                     v = inflater.inflate(R.layout.fragment_test_essay, container, false);
                     answerSheet = (TextView) v.findViewById(R.id.answer_sheet);
+                    answerSheet.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            if (getActivity() instanceof TestActivity) {
+                                ((TestActivity) getActivity()).questionTested[position] = !s.toString().isEmpty();
+                            }
+                        }
+                    });
                     TextView content = (TextView) v.findViewById(R.id.content);
                     content.setText(args.getString("content"));
                 }
@@ -505,12 +574,12 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     if (isTested) {
                         ContentValues vals = new ContentValues();
                         vals.put("ANSWER", answerSheet.getText().toString());
-                        vals.put("SCORE", 0);
+                        //vals.put("SCORE", 0);
                         db.update("gapAnswers", vals, "PID = ? and SNO = ? and QID = ? ", new String[]{PID + "", SNO, QID + ""});
                     } else {
                         ContentValues vals = new ContentValues();
                         vals.put("ANSWER", answerSheet.getText().toString());
-                        vals.put("SCORE", 0);
+                        //vals.put("SCORE", 0);
                         vals.put("SNO", SNO);
                         vals.put("QID", QID);
                         vals.put("PID", PID);
@@ -528,12 +597,12 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     if (isTested) {
                         ContentValues vals = new ContentValues();
                         vals.put("ANSWER", answerSheet.getText().toString());
-                        vals.put("SCORE", 0);
+                        //vals.put("SCORE", 0);
                         db.update("essayAnswers", vals, "PID = ? and SNO = ? and QID = ? ", new String[]{PID + "", SNO, QID + ""});
                     } else {
                         ContentValues vals = new ContentValues();
                         vals.put("ANSWER", answerSheet.getText().toString());
-                        vals.put("SCORE", 0);
+                        //vals.put("SCORE", 0);
                         vals.put("SNO", SNO);
                         vals.put("QID", QID);
                         vals.put("PID", PID);
@@ -545,13 +614,15 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
     private void initPaperView() {
         timeLast = (TextView) findViewById(R.id.time_last_text);
         TextView countText = (TextView) findViewById(R.id.count_text);
         String countHint = "/" + (choiceCount + gapCount + essayCount);
         countText.setText(countHint);
+        questionTested = new boolean[choiceCount + gapCount + essayCount];
         final EditText gotoEdit = (EditText) findViewById(R.id.goto_edit);
-        gotoEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        /*gotoEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -563,7 +634,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 return false;
             }
-        });
+        });*/
+        gotoEdit.setOnClickListener(this);
         pager = (ViewPager) findViewById(R.id.pager);
         mAdapter = new TestAdapter(getSupportFragmentManager());
         pager.setAdapter(mAdapter);

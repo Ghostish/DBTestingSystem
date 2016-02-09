@@ -89,7 +89,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:imeOptions="actionDone"
-                android:inputType="number" />
+                android:inputType="none"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
 
             <TextView
                 android:id="@+id/count_text"
