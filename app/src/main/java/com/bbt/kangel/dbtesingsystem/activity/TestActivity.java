@@ -21,11 +21,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -33,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bbt.kangel.dbtesingsystem.R;
+import com.bbt.kangel.dbtesingsystem.fragment.ConfirmAlertDialogFragment;
 import com.bbt.kangel.dbtesingsystem.fragment.GotoQuestionDialogFragment;
 import com.bbt.kangel.dbtesingsystem.util.DialogActivity;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
@@ -43,8 +42,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import com.bbt.kangel.dbtesingsystem.fragment.ConfirmAlertDialogFragment;
 
 /**
  * Created by Kangel on 2015/12/12.
@@ -60,7 +57,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     private Timer timer = null;
     private TimerTask timerTask = null;
     static private Handler handler = null;
-    private final static int UPDATE_VIEW = 221, COMMIT_FINISHED = 2121, PAPER_PREPARED = 1212;
+    private final static int UPDATE_TIME_LAST = 221, COMMIT_FINISHED = 2121, PAPER_PREPARED = 1212;
+    private final static int PROGRESS = 0, CONFIRM_QUIT = 1, CHOOSE = 2, CONFIRM_SUBMIT = 3;
     private int count = 5400;
     final static private int PERIOD = 1000;
     private TestAdapter mAdapter;
@@ -69,6 +67,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     private int PID;
     private String SNO;
     private ProgressDialog progressDialog;
+    private ConfirmAlertDialogFragment confirmQuitDialog,confirmSubmitDialog;
     private GotoQuestionDialogFragment gotoQuestionDialogFragment;
     private boolean[] questionTested;
 
@@ -86,10 +85,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             this.finish();
         }
         handler = new mHandler(TestActivity.this);
-        progressDialog = new ProgressDialog(TestActivity.this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage(getResources().getString(R.string.paper_loading));
-        progressDialog.show();
+        mShowDialog(PROGRESS,getResources().getString(R.string.paper_loading));
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -118,41 +114,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    static private class mHandler extends Handler {
-        private WeakReference<Activity> mActivity;
-
-        public mHandler(Activity mActivity) {
-            this.mActivity = new WeakReference<>(mActivity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case UPDATE_VIEW:
-                    // updateText();
-                    if (mActivity.get() instanceof TestActivity) {
-                        ((TestActivity) mActivity.get()).updateText();
-                    }
-                    break;
-                case COMMIT_FINISHED:
-                    if (mActivity.get() instanceof TestActivity) {
-                        ((TestActivity) mActivity.get()).progressDialog.dismiss();
-                        ((TestActivity) mActivity.get()).timer.cancel();
-                        mActivity.get().finish();
-                    }
-                    break;
-                case PAPER_PREPARED:
-                    if (mActivity.get() instanceof TestActivity) {
-                        ((TestActivity) mActivity.get()).initPaperView();
-                        ((TestActivity) mActivity.get()).progressDialog.dismiss();
-                        ((TestActivity) mActivity.get()).startTimer();
-                    }
-                    break;
-            }
-        }
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -170,38 +131,107 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void submitPaper() {
-      /*  progressDialog = new ProgressDialog(TestActivity.this);
-        progressDialog.setCancelable(false);*/
-        if (progressDialog != null) {
-            progressDialog.setMessage(getResources().getString(R.string.message_loading));
-            progressDialog.show();
-        }
-        if (mAdapter.getCount() != mAdapter.getMapSize()) {
-            db.delete("choiceAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
-            db.delete("gapAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
-            db.delete("essayAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
-        }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < mAdapter.getCount(); i++) {
-                    if (mAdapter.getFragment(i) != null) {
-                        ((TestFragment) mAdapter.getFragment(i)).commitToDataBase();
-                    }
+    @Override
+    public void onBackPressed() {
+        mShowDialog(CONFIRM_QUIT,null);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.previous_button:
+                if (pager.getCurrentItem() >= 1) {
+                    pager.setCurrentItem(pager.getCurrentItem() - 1);
                 }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                break;
+            case R.id.next_button:
+                if (pager.getCurrentItem() < choiceCount + gapCount + essayCount - 1) {
+                    pager.setCurrentItem(pager.getCurrentItem() + 1);
                 }
-                if (handler != null) {
-                    Message message = Message.obtain(handler, COMMIT_FINISHED);
-                    handler.sendMessage(message);
+                break;
+            case R.id.submit_button: {
+                int leftToDo = mAdapter.getCount() - mAdapter.getMapSize();
+                String msg = "";
+                if (leftToDo != 0) {
+                    msg += "你还有" + leftToDo + "道题没做答,";
                 }
+                msg += getString(R.string.submit_alert_msg);
+                mShowDialog(CONFIRM_SUBMIT,msg);
             }
-        }).start();
-        //progressDialog.dismiss();
+            break;
+            case R.id.goto_edit: {
+                mShowDialog(CHOOSE,null);
+                break;
+            }
+            case R.id.question_num:
+                int nextPosition = Integer.parseInt(((TextView) v).getText().toString()) - 1;
+                gotoQuestionDialogFragment.dismiss();
+                pager.setCurrentItem(nextPosition, true);
+                break;
+            default://for navigation button
+            {
+                mShowDialog(CONFIRM_QUIT,null);
+                /*boolean[] data = {false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false};
+                GotoQuestionDialogFragment gotoQuestionDialogFragment = GotoQuestionDialogFragment.newInstance(data);
+                gotoQuestionDialogFragment.show(getSupportFragmentManager(), "gotoQuestion");*/
+            }
+
+        }
+    }
+
+    @Override
+    public void dismissDialog() {
+
+    }
+
+    @Override
+    public void doAtPositiveButton(String tag) {
+        switch (tag) {
+            case "submitDialog":
+                timer.cancel();
+                submitPaper();
+                break;
+            case "quitDialog":
+                timer.cancel();
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onItemSelected(Bundle args) {
+
+    }
+
+    private void mShowDialog(int type,String msg) {
+        switch (type) {
+            case CONFIRM_QUIT:
+                if (confirmQuitDialog == null) {
+                    confirmQuitDialog = ConfirmAlertDialogFragment.newInstance(R.style.DialogStyle, getString(R.string.title_quit), getString(R.string.msg_quit_test));
+                }
+                confirmQuitDialog.show(getSupportFragmentManager(), "quitDialog");
+                break;
+            case CONFIRM_SUBMIT:
+                if(confirmSubmitDialog == null){
+                    confirmSubmitDialog = ConfirmAlertDialogFragment.newInstance(R.style.DialogStyle, getString(R.string.submit), msg);
+                }
+                confirmSubmitDialog.show(getSupportFragmentManager(), "submitDialog");
+                break;
+            case PROGRESS:
+                if (progressDialog == null) {
+                    progressDialog = new ProgressDialog(TestActivity.this);
+                    progressDialog.setCancelable(false);
+                    progressDialog.setMessage(msg);
+                }
+                progressDialog.show();
+                break;
+            case CHOOSE:
+                if (gotoQuestionDialogFragment == null) {
+                    gotoQuestionDialogFragment = GotoQuestionDialogFragment.newInstance(questionTested);
+                }
+                gotoQuestionDialogFragment.show(getSupportFragmentManager(), "gotoQuestion");
+                break;
+        }
     }
 
     private SQLiteDatabase getDataBase() {
@@ -246,7 +276,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void run() {
                     if (handler != null) {
-                        Message message = Message.obtain(handler, UPDATE_VIEW);
+                        Message message = Message.obtain(handler, UPDATE_TIME_LAST);
                         handler.sendMessage(message);
                     }
                     count--;
@@ -256,78 +286,103 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         timer.schedule(timerTask, 0, PERIOD);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.previous_button:
-                if (pager.getCurrentItem() >= 1) {
-                    pager.setCurrentItem(pager.getCurrentItem() - 1);
-                }
-                break;
-            case R.id.next_button:
-                if (pager.getCurrentItem() < choiceCount + gapCount + essayCount - 1) {
-                    pager.setCurrentItem(pager.getCurrentItem() + 1);
-                }
-                break;
-            case R.id.submit_button: {
-                int leftToDo = mAdapter.getCount() - mAdapter.getMapSize();
-                String msg = "";
-                if (leftToDo != 0) {
-                    msg += "你还有" + leftToDo + "道题没做答,";
-                }
-                msg += getString(R.string.submit_alert_msg);
-                ConfirmAlertDialogFragment fragment = ConfirmAlertDialogFragment.newInstance(R.style.DialogStyle, getString(R.string.submit), msg);
-                fragment.show(getSupportFragmentManager(), "submitDialog");
-            }
-            break;
-            case R.id.goto_edit: {
-                if (gotoQuestionDialogFragment == null) {
-                    gotoQuestionDialogFragment = GotoQuestionDialogFragment.newInstance(questionTested);
-                }
-                gotoQuestionDialogFragment.show(getSupportFragmentManager(), "gotoQuestion");
-                break;
-            }
-            case R.id.question_num:
-                int nextPosition = Integer.parseInt(((TextView) v).getText().toString()) - 1;
-                gotoQuestionDialogFragment.dismiss();
-                pager.setCurrentItem(nextPosition, true);
-                break;
-            default://for navigation button
-            {
-                ConfirmAlertDialogFragment fragment = ConfirmAlertDialogFragment.newInstance(R.style.DialogStyle, getString(R.string.title_quit), getString(R.string.msg_quit_test));
-                fragment.show(getSupportFragmentManager(), "quitDialog");
-                /*boolean[] data = {false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false};
-                GotoQuestionDialogFragment gotoQuestionDialogFragment = GotoQuestionDialogFragment.newInstance(data);
-                gotoQuestionDialogFragment.show(getSupportFragmentManager(), "gotoQuestion");*/
-            }
-
+    private void submitPaper() {
+      /*  progressDialog = new ProgressDialog(TestActivity.this);
+        progressDialog.setCancelable(false);*/
+        mShowDialog(PROGRESS,getResources().getString(R.string.message_loading));
+        if (mAdapter.getCount() != mAdapter.getMapSize()) {
+            db.delete("choiceAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
+            db.delete("gapAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
+            db.delete("essayAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < mAdapter.getCount(); i++) {
+                    if (mAdapter.getFragment(i) != null && questionTested[i]) {
+                        ((TestFragment) mAdapter.getFragment(i)).commitToDataBase();
+                    }
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (handler != null) {
+                    Message message = Message.obtain(handler, COMMIT_FINISHED);
+                    handler.sendMessage(message);
+                }
+            }
+        }).start();
+        //progressDialog.dismiss();
     }
 
-    @Override
-    public void dismissDialog() {
+    private void initPaperView() {
+        timeLast = (TextView) findViewById(R.id.time_last_text);
+        TextView countText = (TextView) findViewById(R.id.count_text);
+        String countHint = "/" + (choiceCount + gapCount + essayCount);
+        countText.setText(countHint);
+        questionTested = new boolean[choiceCount + gapCount + essayCount];
+        final EditText gotoEdit = (EditText) findViewById(R.id.goto_edit);
+        gotoEdit.setOnClickListener(this);
+        pager = (ViewPager) findViewById(R.id.pager);
+        mAdapter = new TestAdapter(getSupportFragmentManager());
+        pager.setAdapter(mAdapter);
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                String currentPage = position + 1 + "";
+                gotoEdit.setText(currentPage);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
-    @Override
-    public void doAtPositiveButton(String tag) {
-        switch (tag) {
-            case "submitDialog":
-                submitPaper();
-                break;
-            case "quitDialog":
-                timer.cancel();
-                finish();
-                break;
+    static private class mHandler extends Handler {
+        private WeakReference<Activity> mActivity;
+
+        public mHandler(Activity mActivity) {
+            this.mActivity = new WeakReference<>(mActivity);
         }
-    }
 
-    @Override
-    public void onItemSelected(Bundle args) {
-
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case UPDATE_TIME_LAST:
+                    // updateText();
+                    if (mActivity.get() instanceof TestActivity) {
+                        ((TestActivity) mActivity.get()).updateText();
+                    }
+                    break;
+                case COMMIT_FINISHED:
+                    if (mActivity.get() instanceof TestActivity) {
+                        ((TestActivity) mActivity.get()).progressDialog.dismiss();
+                        mActivity.get().finish();
+                    }
+                    break;
+                case PAPER_PREPARED:
+                    if (mActivity.get() instanceof TestActivity) {
+                        ((TestActivity) mActivity.get()).initPaperView();
+                        ((TestActivity) mActivity.get()).progressDialog.dismiss();
+                        ((TestActivity) mActivity.get()).startTimer();
+                    }
+                    break;
+            }
+        }
     }
 
     private class TestAdapter extends FragmentStatePagerAdapter {
+
         private Map<Integer, Fragment> map = new HashMap<>();
 
         public TestAdapter(FragmentManager fm) {
@@ -390,10 +445,13 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         public int getMapSize() {
             return map.size();
         }
+
     }
 
     public static class TestFragment extends Fragment {
+
         int TYPE;
+
         int QID;
         int SCORE;
         int position;
@@ -613,48 +671,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     Log.e("error", "typeerror");
             }
         }
-    }
 
-    private void initPaperView() {
-        timeLast = (TextView) findViewById(R.id.time_last_text);
-        TextView countText = (TextView) findViewById(R.id.count_text);
-        String countHint = "/" + (choiceCount + gapCount + essayCount);
-        countText.setText(countHint);
-        questionTested = new boolean[choiceCount + gapCount + essayCount];
-        final EditText gotoEdit = (EditText) findViewById(R.id.goto_edit);
-        /*gotoEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    int toPage = Integer.parseInt(gotoEdit.getText().toString()) - 1;
-                    if (0 < toPage && toPage < choiceCount + gapCount + essayCount) {
-                        pager.setCurrentItem(toPage);
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });*/
-        gotoEdit.setOnClickListener(this);
-        pager = (ViewPager) findViewById(R.id.pager);
-        mAdapter = new TestAdapter(getSupportFragmentManager());
-        pager.setAdapter(mAdapter);
-        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                String currentPage = position + 1 + "";
-                gotoEdit.setText(currentPage);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 }

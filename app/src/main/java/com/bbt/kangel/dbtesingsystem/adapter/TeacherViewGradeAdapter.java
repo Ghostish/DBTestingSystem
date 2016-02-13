@@ -47,10 +47,10 @@ public class TeacherViewGradeAdapter extends RecyclerView.Adapter<TeacherViewGra
         cursor.moveToPosition(position);
         holder.text_sno.setText(cursor.getString(cursor.getColumnIndex("SNO")));
         holder.text_name.setText(cursor.getString(cursor.getColumnIndex("SNAME")));
-        String GRADE = cursor.getInt(cursor.getColumnIndex("GRADE")) + "分";
+        String GRADE = cursor.getString(cursor.getColumnIndex("GRADE"));
         holder.text_grade.setText(GRADE);
-        String PAPER_ID = cursor.getInt(cursor.getColumnIndex("PID")) + "号试卷";
-        holder.text_pid.setText(PAPER_ID);
+        int PAPER_ID = cursor.getInt(cursor.getColumnIndex("PID"));
+        holder.text_pid.setText(PAPER_ID+"");
     }
 
     @Override

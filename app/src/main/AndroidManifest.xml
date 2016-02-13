@@ -22,7 +22,7 @@
         <activity android:name=".activity.TeacherMainActivity"/>
         <activity android:name=".activity.DeanMainActivity"/>
         <activity android:name=".activity.TestActivity" android:parentActivityName=".activity.StudentMainActivity"/>
-        <activity android:name=".activity.ViewGradeActivity"/>
+        <activity android:name=".activity.TeacherChooseUnmarkedActivity"/>
     </application>
 
 </manifest>

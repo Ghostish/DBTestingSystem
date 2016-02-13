@@ -32,6 +32,7 @@
     <string name="toast_times_up">考试时间到</string>
     <string name="title_logout">确认登出</string>
     <string name="msg_logout">登出后你的需要重新登陆</string>
-    <string name="paper_loading">正在准备试卷...</string>
+    <string name="paper_loading">正在准备试卷&#8230;</string>
     <string name="title_choose_num">请选择题号</string>
+    <string name="title_view_unmarked_paper">选择学生考卷</string>
 </resources>

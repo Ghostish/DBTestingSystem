@@ -25,6 +25,12 @@ public class TestDataBaseUtil {
         return db.rawQuery("select * from papers order by PID", null);
     }
 
+    public static Cursor getPaperUnmarked(SQLiteDatabase db, int PID) {
+        Cursor c;
+        c = db.rawQuery("select x.SNO ,SNAME ,'unmarked' GRADE , ? PID from students x  where exists (select * from students y, gapAnswers  where PID = ? and x.SNO = y.SNO and gapAnswers.SNO = y.SNO  and gapAnswers.isMarked = 0) or exists (select * from students z, essayAnswers  where PID = ? and x.SNO = z.SNO and essayAnswers.SNO = z.SNO  and essayAnswers.isMarked = 0)", new String[]{PID + "",PID + "",PID + ""});
+        return c;
+    }
+
     /*return a cursor with column SNO,SNAME,PID,GRADE*/
     public static Cursor getGrade(SQLiteDatabase db, String SNO) {
         if (SNO != null) {
@@ -34,7 +40,7 @@ public class TestDataBaseUtil {
         }
     }
 
-    public static Cursor getGradeDetail(SQLiteDatabase db, String SNO){
+    public static Cursor getGradeDetail(SQLiteDatabase db, String SNO) {
         /*int [] result = new int[3];
         Cursor c = db.rawQuery("select sum(SCORE) SUM from choiceAnswers where SNO = ? and PID = ?",new String[]{SNO,1 + ""});
         c.moveToPosition(0);
@@ -48,9 +54,10 @@ public class TestDataBaseUtil {
         c.moveToPosition(0);
         result[2] = c.getInt(c.getColumnIndex("SUM"));
         c.close();*/
-       // return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore,gapScore,essayScore where choiceScore.SNO = ? and gapScore.SNO = ? and essayScore.SNO = ? and choiceScore.PID = gapScore.PID and choiceScore.PID = essayScore.PID",new String[]{SNO,SNO,SNO});
-        return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore  left join gapScore on choiceScore.PID = gapScore.PID left join essayScore on essayScore.PID = gapScore.PID where choiceScore.SNO = ? ",new String[]{SNO});
+        // return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore,gapScore,essayScore where choiceScore.SNO = ? and gapScore.SNO = ? and essayScore.SNO = ? and choiceScore.PID = gapScore.PID and choiceScore.PID = essayScore.PID",new String[]{SNO,SNO,SNO});
+        return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore  left join gapScore on choiceScore.PID = gapScore.PID left join essayScore on essayScore.PID = gapScore.PID where choiceScore.SNO = ? ", new String[]{SNO});
     }
+
     /*返回一张考卷的具体内容
     * 返回的是一个包含三个游标的游标数组，
     * 第一个是选择题游标，包含每道选择题的绝对题号，题目内容，分别四个选项的具体内容，标准答案，以及在该试卷中的分值
@@ -58,22 +65,22 @@ public class TestDataBaseUtil {
     * 第三个是简答题游标，列的内容和填空题相似*/
     public static Cursor[] getPaperDetail(SQLiteDatabase db, int PID) {
         Cursor[] c = new Cursor[3];
-        String [] selectionArg = new String[]{PID + ""};
-        c[0] =db.rawQuery("select choiceQuestion.QID QID,CONTENT,CHOICEA,CHOICEB,CHOICEC,CHOICED,ANSWER,SCORE from choiceQuestion,choiceInPapers where PID = ? and choiceQuestion.QID = choiceInPapers.PID",selectionArg);
-        c[1]=db.rawQuery("select gapQuestion.QID QID,CONTENT,ANSWER,SCORE from gapQuestion,gapInPapers where PID = ? and gapQuestion.QID = gapInPapers.QID",selectionArg);
-        c[2]=db.rawQuery("select essayQuestion.QID QID,CONTENT,ANSWER,SCORE from essayQuestion,essayInPapers where PID = ? and essayQuestion.QID = essayInPapers.QID",selectionArg);
+        String[] selectionArg = new String[]{PID + ""};
+        c[0] = db.rawQuery("select choiceQuestion.QID QID,CONTENT,CHOICEA,CHOICEB,CHOICEC,CHOICED,ANSWER,SCORE from choiceQuestion,choiceInPapers where PID = ? and choiceQuestion.QID = choiceInPapers.PID", selectionArg);
+        c[1] = db.rawQuery("select gapQuestion.QID QID,CONTENT,ANSWER,SCORE from gapQuestion,gapInPapers where PID = ? and gapQuestion.QID = gapInPapers.QID", selectionArg);
+        c[2] = db.rawQuery("select essayQuestion.QID QID,CONTENT,ANSWER,SCORE from essayQuestion,essayInPapers where PID = ? and essayQuestion.QID = essayInPapers.QID", selectionArg);
         return c;
     }
 
     /*返回学生的作答信息
     * 其中选择题包含每题的绝对题号，题目内容，分别四个选项的内容，学生给出的答案，以及系统对这一题的给分。
     * 其中填空题,简答题包含每题的绝对题号，题目内容，学生的给出的答案，以及老师对这一题的评分,score 为-1 表示尚未评分*/
-    public static Cursor[] getStudentAnswerDetail(SQLiteDatabase db , String SNO,int PID){
-        Cursor [] c = new Cursor[3];
-        String [] selectionArgs = new String[]{SNO,PID + ""};
-        c[0] = db.rawQuery("select choiceQuestion.QID QID,CONTENT,CHOICEA,CHOICEB,CHOICEC,CHOICED,choiseAnswers.ANSWER,SCORE from choiseAnswers ,choiceInPapers where SNO = ? and PID = ? and choiseAnswers.QID = choiceQuestion.QID",selectionArgs);
-        c[1] = db.rawQuery("select gapQuestion.QID QID,CONTENT,gapAnswers.ANSWER,SCORE from gapAnswers,gapQuestion where SNO = ? and PID = ? and gapAnswers.QID = gapQuestion.QID",selectionArgs);
-        c[2] = db.rawQuery("select essayQuestion.QID QID,CONTENT,essayAnswers.ANSWER,SCORE from essayAnswers,essayQuestion where SNO = ? and PID = ? and essayAnswers.QID = essayQuestion.QID",selectionArgs);
+    public static Cursor[] getStudentAnswerDetail(SQLiteDatabase db, String SNO, int PID) {
+        Cursor[] c = new Cursor[3];
+        String[] selectionArgs = new String[]{SNO, PID + ""};
+        c[0] = db.rawQuery("select choiceQuestion.QID QID,CONTENT,CHOICEA,CHOICEB,CHOICEC,CHOICED,choiseAnswers.ANSWER,SCORE from choiseAnswers ,choiceInPapers where SNO = ? and PID = ? and choiseAnswers.QID = choiceQuestion.QID", selectionArgs);
+        c[1] = db.rawQuery("select gapQuestion.QID QID,CONTENT,gapAnswers.ANSWER,SCORE from gapAnswers,gapQuestion where SNO = ? and PID = ? and gapAnswers.QID = gapQuestion.QID", selectionArgs);
+        c[2] = db.rawQuery("select essayQuestion.QID QID,CONTENT,essayAnswers.ANSWER,SCORE from essayAnswers,essayQuestion where SNO = ? and PID = ? and essayAnswers.QID = essayQuestion.QID", selectionArgs);
         return c;
     }
 
