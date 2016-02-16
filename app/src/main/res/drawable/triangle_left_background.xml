@@ -10,7 +10,7 @@
                 <stroke
                     android:width="10dp"
                     android:color="@color/transparent" />
-                <solid android:color="@color/BluecolorPrimaryDark" />
+                <solid android:color="@color/BlueColorPrimaryDark" />
             </shape>
         </rotate>
     </item>

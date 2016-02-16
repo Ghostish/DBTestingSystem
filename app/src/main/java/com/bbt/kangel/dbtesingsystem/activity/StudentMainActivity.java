@@ -27,7 +27,7 @@ public class StudentMainActivity extends AppCompatActivity implements View.OnCli
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String name = preferences.getString("name",null);
        if(name != null){
-           nameText.setText(name);
+           nameText.setText(getString(R.string.student_welcome,name));
        }
 
     }
@@ -79,7 +79,7 @@ public class StudentMainActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void onItemSelected(Bundle args) {
+    public void onDialogItemSelect(Bundle args) {
         Intent intent = new Intent(StudentMainActivity.this, TestActivity.class);
         intent.putExtras(args);
         startActivity(intent);

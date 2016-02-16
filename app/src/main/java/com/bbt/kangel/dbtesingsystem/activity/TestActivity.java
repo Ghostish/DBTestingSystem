@@ -35,7 +35,9 @@ import com.bbt.kangel.dbtesingsystem.fragment.ConfirmAlertDialogFragment;
 import com.bbt.kangel.dbtesingsystem.fragment.GotoQuestionDialogFragment;
 import com.bbt.kangel.dbtesingsystem.util.DialogActivity;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
-import com.bbt.kangel.dbtesingsystem.util.mDataBaseHelper;
+import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
+
+import junit.framework.Test;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -62,12 +64,12 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     private int count = 5400;
     final static private int PERIOD = 1000;
     private TestAdapter mAdapter;
-    private mDataBaseHelper helper;
+    private DataBaseHelper helper;
     private SQLiteDatabase db;
     private int PID;
     private String SNO;
     private ProgressDialog progressDialog;
-    private ConfirmAlertDialogFragment confirmQuitDialog,confirmSubmitDialog;
+    private ConfirmAlertDialogFragment confirmQuitDialog, confirmSubmitDialog;
     private GotoQuestionDialogFragment gotoQuestionDialogFragment;
     private boolean[] questionTested;
 
@@ -85,11 +87,11 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             this.finish();
         }
         handler = new mHandler(TestActivity.this);
-        mShowDialog(PROGRESS,getResources().getString(R.string.paper_loading));
+        mShowDialog(PROGRESS, getResources().getString(R.string.paper_loading));
         new Thread(new Runnable() {
             @Override
             public void run() {
-                helper = new mDataBaseHelper(TestActivity.this, GlobalKeeper.DB_NAME, 1);
+                helper = new DataBaseHelper(TestActivity.this, GlobalKeeper.DB_NAME, 1);
                 db = helper.getWritableDatabase();
                 choiceCursor = db.rawQuery(SELECT_CHOICES, new String[]{PID + ""});
                 gapCursor = db.rawQuery(SELECT_GAPS, new String[]{PID + ""});
@@ -133,7 +135,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        mShowDialog(CONFIRM_QUIT,null);
+        mShowDialog(CONFIRM_QUIT, null);
     }
 
     @Override
@@ -156,11 +158,11 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     msg += "你还有" + leftToDo + "道题没做答,";
                 }
                 msg += getString(R.string.submit_alert_msg);
-                mShowDialog(CONFIRM_SUBMIT,msg);
+                mShowDialog(CONFIRM_SUBMIT, msg);
             }
             break;
             case R.id.goto_edit: {
-                mShowDialog(CHOOSE,null);
+                mShowDialog(CHOOSE, null);
                 break;
             }
             case R.id.question_num:
@@ -170,7 +172,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default://for navigation button
             {
-                mShowDialog(CONFIRM_QUIT,null);
+                mShowDialog(CONFIRM_QUIT, null);
                 /*boolean[] data = {false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false, false, false, true, false, true, false};
                 GotoQuestionDialogFragment gotoQuestionDialogFragment = GotoQuestionDialogFragment.newInstance(data);
                 gotoQuestionDialogFragment.show(getSupportFragmentManager(), "gotoQuestion");*/
@@ -199,11 +201,11 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onItemSelected(Bundle args) {
+    public void onDialogItemSelect(Bundle args) {
 
     }
 
-    private void mShowDialog(int type,String msg) {
+    private void mShowDialog(int type, String msg) {
         switch (type) {
             case CONFIRM_QUIT:
                 if (confirmQuitDialog == null) {
@@ -212,8 +214,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 confirmQuitDialog.show(getSupportFragmentManager(), "quitDialog");
                 break;
             case CONFIRM_SUBMIT:
-                if(confirmSubmitDialog == null){
-                    confirmSubmitDialog = ConfirmAlertDialogFragment.newInstance(R.style.DialogStyle, getString(R.string.submit), msg);
+                if (confirmSubmitDialog == null) {
+                    confirmSubmitDialog = ConfirmAlertDialogFragment.newInstance(R.style.DialogStyle, getString(R.string.title_submit), msg);
                 }
                 confirmSubmitDialog.show(getSupportFragmentManager(), "submitDialog");
                 break;
@@ -221,8 +223,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 if (progressDialog == null) {
                     progressDialog = new ProgressDialog(TestActivity.this);
                     progressDialog.setCancelable(false);
-                    progressDialog.setMessage(msg);
                 }
+                progressDialog.setMessage(msg);
                 progressDialog.show();
                 break;
             case CHOOSE:
@@ -250,7 +252,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         return SNO;
     }
 
-    private void updateText() {
+    private void updateTimeLastText() {
         if (count == 0) {
             // TODO: 2015/12/14 alert the student and submit the paper
             Toast.makeText(TestActivity.this, getString(R.string.toast_times_up), Toast.LENGTH_SHORT).show();
@@ -289,12 +291,10 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     private void submitPaper() {
       /*  progressDialog = new ProgressDialog(TestActivity.this);
         progressDialog.setCancelable(false);*/
-        mShowDialog(PROGRESS,getResources().getString(R.string.message_loading));
-        if (mAdapter.getCount() != mAdapter.getMapSize()) {
-            db.delete("choiceAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
-            db.delete("gapAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
-            db.delete("essayAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
-        }
+        mShowDialog(PROGRESS, getResources().getString(R.string.msg_saving));
+        db.delete("choiceAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
+        db.delete("gapAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
+        db.delete("essayAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -356,25 +356,25 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+            TestActivity activity = (TestActivity) mActivity.get();
             switch (msg.what) {
                 case UPDATE_TIME_LAST:
-                    // updateText();
+                    // updateTimeLastText();
                     if (mActivity.get() instanceof TestActivity) {
-                        ((TestActivity) mActivity.get()).updateText();
+                        activity.updateTimeLastText();
                     }
                     break;
                 case COMMIT_FINISHED:
                     if (mActivity.get() instanceof TestActivity) {
-                        ((TestActivity) mActivity.get()).progressDialog.dismiss();
-                        mActivity.get().finish();
+                        activity.progressDialog.dismiss();
+                        activity.finish();
                     }
                     break;
                 case PAPER_PREPARED:
                     if (mActivity.get() instanceof TestActivity) {
-                        ((TestActivity) mActivity.get()).initPaperView();
-                        ((TestActivity) mActivity.get()).progressDialog.dismiss();
-                        ((TestActivity) mActivity.get()).startTimer();
+                        activity.initPaperView();
+                        activity.progressDialog.dismiss();
+                        activity.startTimer();
                     }
                     break;
             }
@@ -451,7 +451,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     public static class TestFragment extends Fragment {
 
         int TYPE;
-
         int QID;
         int SCORE;
         int position;
@@ -577,18 +576,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             SQLiteDatabase db = ((TestActivity) context).getDataBase();
             int PID = ((TestActivity) context).getPID();
             String SNO = ((TestActivity) context).getSNO();
-            boolean isTested = false; //标记是否曾经考过这份试卷
-            Cursor c;
             switch (TYPE) {
-                case CHOICE:
-                    c = db.rawQuery("select * from choiceAnswers where PID = ? and SNO = ? and QID = ?", new String[]{PID + "", SNO, QID + ""});
-                    if (c.getCount() > 0) {
-                            /*db.delete("choiceAnswers","PID = ? and SNO = ?",selectionArgs);
-                            db.delete("gapAnswers","PID = ? and SNO = ?",selectionArgs);
-                            db.delete("essayAnswers","PID = ? and SNO = ?",selectionArgs);*/
-                        isTested = true;
-                    }
-                    c.close();
+                case CHOICE: {
                     String selection;
                     switch (radioGroup.getCheckedRadioButtonId()) {
                         case R.id.A:
@@ -606,67 +595,35 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                         default:
                             selection = "#";
                     }
-                    if (isTested) {
-                        ContentValues vals = new ContentValues();
-                        vals.put("ANSWER", selection);
-                        vals.put("SCORE", selection.equals(choiceAnswer) ? SCORE : 0);
-                        db.update("choiceAnswers", vals, "PID = ? and SNO = ? and QID = ? ", new String[]{PID + "", SNO, QID + ""});
-                    } else {
-                        ContentValues vals = new ContentValues();
-                        vals.put("ANSWER", selection);
-                        vals.put("SCORE", selection.equals(choiceAnswer) ? SCORE : 0);
-                        vals.put("SNO", SNO);
-                        vals.put("QID", QID);
-                        vals.put("PID", PID);
-                        db.insert("choiceAnswers", null, vals);
-                    }
+                    ContentValues vals = new ContentValues();
+                    vals.put("ANSWER", selection);
+                    vals.put("SCORE", selection.equals(choiceAnswer) ? SCORE : 0);
+                    vals.put("SNO", SNO);
+                    vals.put("QID", QID);
+                    vals.put("PID", PID);
+                    db.insert("choiceAnswers", null, vals);
                     break;
-                case GAP:
-                    c = db.rawQuery("select * from gapAnswers where PID = ? and SNO = ? and QID = ?", new String[]{PID + "", SNO, QID + ""});
-                    if (c.getCount() > 0) {
-                            /*db.delete("choiceAnswers","PID = ? and SNO = ?",selectionArgs);
-                            db.delete("gapAnswers","PID = ? and SNO = ?",selectionArgs);
-                            db.delete("essayAnswers","PID = ? and SNO = ?",selectionArgs);*/
-                        isTested = true;
-                    }
-                    if (isTested) {
-                        ContentValues vals = new ContentValues();
-                        vals.put("ANSWER", answerSheet.getText().toString());
-                        //vals.put("SCORE", 0);
-                        db.update("gapAnswers", vals, "PID = ? and SNO = ? and QID = ? ", new String[]{PID + "", SNO, QID + ""});
-                    } else {
-                        ContentValues vals = new ContentValues();
-                        vals.put("ANSWER", answerSheet.getText().toString());
-                        //vals.put("SCORE", 0);
-                        vals.put("SNO", SNO);
-                        vals.put("QID", QID);
-                        vals.put("PID", PID);
-                        db.insert("gapAnswers", null, vals);
-                    }
+                }
+                case GAP: {
+                    ContentValues vals = new ContentValues();
+                    vals.put("ANSWER", answerSheet.getText().toString());
+                    //vals.put("SCORE", 0);
+                    vals.put("SNO", SNO);
+                    vals.put("QID", QID);
+                    vals.put("PID", PID);
+                    db.insert("gapAnswers", null, vals);
                     break;
-                case ESSAY:
-                    c = db.rawQuery("select * from essayAnswers where PID = ? and SNO = ? and QID = ?", new String[]{PID + "", SNO, QID + ""});
-                    if (c.getCount() > 0) {
-                            /*db.delete("choiceAnswers","PID = ? and SNO = ?",selectionArgs);
-                            db.delete("gapAnswers","PID = ? and SNO = ?",selectionArgs);
-                            db.delete("essayAnswers","PID = ? and SNO = ?",selectionArgs);*/
-                        isTested = true;
-                    }
-                    if (isTested) {
-                        ContentValues vals = new ContentValues();
-                        vals.put("ANSWER", answerSheet.getText().toString());
-                        //vals.put("SCORE", 0);
-                        db.update("essayAnswers", vals, "PID = ? and SNO = ? and QID = ? ", new String[]{PID + "", SNO, QID + ""});
-                    } else {
-                        ContentValues vals = new ContentValues();
-                        vals.put("ANSWER", answerSheet.getText().toString());
-                        //vals.put("SCORE", 0);
-                        vals.put("SNO", SNO);
-                        vals.put("QID", QID);
-                        vals.put("PID", PID);
-                        db.insert("essayAnswers", null, vals);
-                    }
+                }
+                case ESSAY: {
+                    ContentValues vals = new ContentValues();
+                    vals.put("ANSWER", answerSheet.getText().toString());
+                    //vals.put("SCORE", 0);
+                    vals.put("SNO", SNO);
+                    vals.put("QID", QID);
+                    vals.put("PID", PID);
+                    db.insert("essayAnswers", null, vals);
                     break;
+                }
                 default:
                     Log.e("error", "typeerror");
             }

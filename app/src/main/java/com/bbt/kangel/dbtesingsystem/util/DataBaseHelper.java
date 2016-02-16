@@ -9,7 +9,7 @@ import java.util.Deque;
 /**
  * Created by Kangel on 2015/12/7.
  */
-public class mDataBaseHelper extends SQLiteOpenHelper {
+public class DataBaseHelper extends SQLiteOpenHelper {
     static final String[] CREATE = new String[]{"create table students (SNO varchar(12) primary key ,SNAME varchar(10),MAJOR varchar(20),PASSWORD varchar(12) not null);\n",
             "create table teachers (TNO varchar(12) primary key , TNAME varchar(10), PASSWORD varchar(12) not null);\n",
             "create table deans (DNO varchar(12) primary key , DNAME varchar(10) , PASSWORD varchar(12) not null);\n",
@@ -147,7 +147,7 @@ public class mDataBaseHelper extends SQLiteOpenHelper {
             "(2,5,10),\n" +
             "(2,6,10);";
 
-    public mDataBaseHelper(Context context, String name, int version) {
+    public DataBaseHelper(Context context, String name, int version) {
         super(context, name, null, version);
     }
 

@@ -3,22 +3,22 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/BluecolorPrimary</item>
-        <item name="colorPrimaryDark">@color/BluecolorPrimaryDark</item>
-        <item name="colorAccent">@color/RedcolorPrimary</item>
+        <item name="colorPrimary">@color/BlueColorPrimary</item>
+        <item name="colorPrimaryDark">@color/BlueColorPrimaryDark</item>
+        <item name="colorAccent">@color/RedColorPrimary</item>
         <item name="alertDialogTheme">@style/DialogStyle</item>
     </style>
 
     <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/RedcolorPrimary</item>
-        <item name="colorPrimaryDark">@color/RedcolorPrimaryDark</item>
-        <item name="colorAccent">@color/BluecolorPrimary</item>
+        <item name="colorPrimary">@color/RedColorPrimary</item>
+        <item name="colorPrimaryDark">@color/RedColorPrimaryDark</item>
+        <item name="colorAccent">@color/BlueColorPrimary</item>
     </style>
     <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <!-- Used for the buttons -->
-        <item name="colorAccent">@color/RedcolorPrimary</item>
+        <item name="colorAccent">@color/RedColorPrimary</item>
         <!-- Used for the title and text -->
-        <item name="android:textColorPrimary">@color/BluecolorPrimary</item>
+        <item name="android:textColorPrimary">@color/BlueColorPrimary</item>
     </style>
 </resources>

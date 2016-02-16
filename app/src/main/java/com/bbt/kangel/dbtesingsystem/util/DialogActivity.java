@@ -8,5 +8,5 @@ import android.os.Bundle;
 public interface DialogActivity {
     void dismissDialog();
     void doAtPositiveButton(String tag);
-    void onItemSelected(Bundle args);
+    void onDialogItemSelect(Bundle args);
 }

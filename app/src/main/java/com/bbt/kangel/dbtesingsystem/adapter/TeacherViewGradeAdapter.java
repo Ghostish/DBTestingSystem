@@ -2,6 +2,7 @@ package com.bbt.kangel.dbtesingsystem.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bbt.kangel.dbtesingsystem.R;
+import com.bbt.kangel.dbtesingsystem.util.RecyclerViewActivity;
 
 /**
  * Created by Kangel on 2015/12/13.
@@ -51,10 +53,27 @@ public class TeacherViewGradeAdapter extends RecyclerView.Adapter<TeacherViewGra
         holder.text_grade.setText(GRADE);
         int PAPER_ID = cursor.getInt(cursor.getColumnIndex("PID"));
         holder.text_pid.setText(PAPER_ID+"");
+        if (!holder.itemView.hasOnClickListeners()) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(context instanceof RecyclerViewActivity){
+                        Bundle args = new Bundle();
+                        args.putString("sno", cursor.getString(cursor.getColumnIndex("SNO")));
+                        args.putInt("pid",cursor.getInt(cursor.getColumnIndex("PID")));
+                        ((RecyclerViewActivity) context).onRecyclerViewItemSelect(args);
+                    }
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
         return cursor.getCount();
+    }
+
+    public void updataCursor(Cursor c) {
+        this.cursor = c;
     }
 }

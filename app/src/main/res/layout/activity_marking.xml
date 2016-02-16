@@ -13,46 +13,26 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-        app:title="">
+        app:title="@string/title_marking"
+        app:titleTextColor="?android:textColorPrimaryInverse">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/label_last_time_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_time_last"
-                android:textColor="?android:textColorPrimaryInverse"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/time_last_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00:00:00"
-                android:textColor="?android:textColorPrimaryInverse"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-
-        <Button
+        <ImageButton
             android:id="@+id/submit_button"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="end"
             android:background="?android:selectableItemBackground"
+            android:contentDescription="@string/submit"
             android:onClick="onClick"
-            android:text="@string/submit_paper"
-            android:textColor="?android:textColorPrimaryInverse" />
+            android:src="@drawable/ic_tap_ok" />
+
     </android.support.v7.widget.Toolbar>
+
     <View
-        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:background="@drawable/toolbar_shadow"/>
+        android:layout_below="@id/toolbar"
+        android:background="@drawable/toolbar_shadow" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,7 +46,7 @@
             android:layout_height="0dp"
             android:layout_weight="9" />
 
-        <RelativeLayout
+        <!--<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -79,6 +59,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
+                android:alpha="0.26"
                 android:background="@drawable/triangle_left_background"
                 android:onClick="onClick" />
 
@@ -88,10 +69,10 @@
                 android:layout_height="48dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:imeOptions="actionDone"
-                android:inputType="none"
                 android:focusable="false"
-                android:focusableInTouchMode="false"/>
+                android:focusableInTouchMode="false"
+                android:imeOptions="actionDone"
+                android:inputType="none" />
 
             <TextView
                 android:id="@+id/count_text"
@@ -111,9 +92,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:alpha="0.26"
                 android:background="@drawable/triangle_right_backgound"
                 android:onClick="onClick" />
-        </RelativeLayout>
+        </RelativeLayout>-->
     </LinearLayout>
 
 </RelativeLayout>

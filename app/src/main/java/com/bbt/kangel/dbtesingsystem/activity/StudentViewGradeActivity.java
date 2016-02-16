@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.util.TestDataBaseUtil;
-import com.bbt.kangel.dbtesingsystem.util.mDataBaseHelper;
+import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
 
 import com.bbt.kangel.dbtesingsystem.adapter.StudentViewGradeAdapter;
 
@@ -26,7 +26,7 @@ public class StudentViewGradeActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mDataBaseHelper helper = new mDataBaseHelper(this,"test.db",1);
+        DataBaseHelper helper = new DataBaseHelper(this,"test.db",1);
         String SNO = PreferenceManager.getDefaultSharedPreferences(this).getString("ID",null);
         StudentViewGradeAdapter adapter = new StudentViewGradeAdapter(this, TestDataBaseUtil.getGradeDetail(helper.getReadableDatabase(),SNO));
         recyclerView.setAdapter(adapter);

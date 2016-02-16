@@ -47,7 +47,7 @@ public class ViewPaperListAdapter extends RecyclerView.Adapter<ViewPaperListAdap
                     /*context.startActivity(intent);
                     ((DialogActivity) context).dismissDialog();*/
                     if(context instanceof DialogActivity){
-                        ((DialogActivity) context).onItemSelected(bundle);
+                        ((DialogActivity) context).onDialogItemSelect(bundle);
                     }
                 }
             });

@@ -2,13 +2,17 @@
     <string name="app_name">DBTesingSystem</string>
     <string name="hint_username">用户名</string>
     <string name="hint_password">密码</string>
+    <string name="hint_input_score">请输入评分：</string>
+    <string name="hint_students_answers">学生作答：</string>
     <string name="tap_to_login">登录</string>
     <string name="start_test">开始考试</string>
     <string name="show_result">查看成绩</string>
     <string name="welcome">欢迎进入数据库考试系统</string>
     <string name="mark_papers">批改考试</string>
     <string name="answer_here">你的答案</string>
-    <string name="submit">交卷</string>
+    <string name="title_submit">确认提交</string>
+    <string name="submit">提交</string>
+    <string name="submit_paper">交卷</string>
     <string name="label_name">姓名：</string>
     <string name="label_sno">学号：</string>
     <string name="label_grade_sum">总分：</string>
@@ -20,7 +24,7 @@
     <string name="label_student">同学:</string>
     <string name="label_create_time">创建日期：</string>
     <string name="title_choose_paper">请选择一门考试</string>
-    <string name="message_loading">请稍后</string>
+    <string name="msg_saving">保存中,请稍后&#8230;</string>
     <string name="label_grade_choice">选择题：</string>
     <string name="label_grade_gap">填空题：</string>
     <string name="label_grade_essay">简答题</string>
@@ -35,4 +39,13 @@
     <string name="paper_loading">正在准备试卷&#8230;</string>
     <string name="title_choose_num">请选择题号</string>
     <string name="title_view_unmarked_paper">选择学生考卷</string>
+    <string name="label_give_score">评分</string>
+    <string name="title_marking">批改考试</string>
+    <string name="mark_indicator">正在批改%1$d题，共%2$d题</string>
+    <string name="score_indicator">%1$d分</string>
+    <string name="student_welcome">%1$s同学</string>
+    <string name="teacher_welcome">%1$s老师</string>
+    <string name="dean_welcome">%1$s教务员</string>
+    <string name="msg_quit_mark">您的批改将不会被保存</string>
+    <string name="msg_submit_mark">请确保您已经完成批改</string>
 </resources>

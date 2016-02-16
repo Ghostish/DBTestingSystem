@@ -17,13 +17,13 @@ import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.adapter.ViewPaperListAdapter;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.TestDataBaseUtil;
-import com.bbt.kangel.dbtesingsystem.util.mDataBaseHelper;
+import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
 
 /**
  * Created by Kangel on 2015/12/14.
  */
 public class SelectPaperDialogFragment extends DialogFragment {
-    private mDataBaseHelper helper;
+    private DataBaseHelper helper;
     private Cursor c;
     private SQLiteDatabase db;
 
@@ -42,7 +42,7 @@ public class SelectPaperDialogFragment extends DialogFragment {
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recycle_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        helper = new mDataBaseHelper(getActivity(), GlobalKeeper.DB_NAME, 1);
+        helper = new DataBaseHelper(getActivity(), GlobalKeeper.DB_NAME, 1);
         db = helper.getReadableDatabase();
         c = TestDataBaseUtil.getPaperList(db);
         ViewPaperListAdapter adapter = new ViewPaperListAdapter(getActivity(), c);

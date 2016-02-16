@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
-import com.bbt.kangel.dbtesingsystem.util.mDataBaseHelper;
+import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
 
 /**
  * Created by Kangel on 2015/12/5.
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Spinner spinner;
     private TextView loginTextButton;
     private SQLiteDatabase db;
-    private mDataBaseHelper helper;
+    private DataBaseHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String[] roleArray = getResources().getStringArray(R.array.role_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, roleArray);
         spinner.setAdapter(adapter);
-        helper = new mDataBaseHelper(this, GlobalKeeper.DB_NAME, 1);
+        helper = new DataBaseHelper(this, GlobalKeeper.DB_NAME, 1);
 
     }
 
