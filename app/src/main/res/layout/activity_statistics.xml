@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lighter_background"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/Label_statistics"
+        android:textColor="@color/RedColorPrimaryDark"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_max_grade"
+        android:textColor="@color/BlueColorPrimaryDark" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <ProgressBar
+            android:id="@+id/progress_max_grade"
+            style="?android:progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="9"
+            android:max="100"
+            android:progress="90"
+            android:progressDrawable="@drawable/custom_progress_bar" />
+        <TextView
+            android:id="@+id/text_max_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorHint"
+            android:textSize="14sp"
+            android:gravity="end"
+            android:layout_weight="1"
+            android:text="95分"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_min_grade"
+        android:textColor="@color/BlueColorPrimaryDark" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <ProgressBar
+            android:id="@+id/progress_min_grade"
+            style="?android:progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="9"
+            android:max="100"
+            android:progress="50"
+            android:progressDrawable="@drawable/custom_progress_bar" />
+        <TextView
+            android:id="@+id/text_min_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorHint"
+            android:textSize="14sp"
+            android:gravity="end"
+            android:layout_weight="1"
+            android:text="50分"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_average_grade"
+        android:textColor="@color/BlueColorPrimaryDark" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp">
+
+        <ProgressBar
+            android:id="@+id/progress_average_grade"
+            style="?android:progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_weight="9"
+            android:max="100"
+            android:progress="65"
+            android:progressDrawable="@drawable/custom_progress_bar" />
+        <TextView
+            android:id="@+id/text_average_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorHint"
+            android:textSize="14sp"
+            android:gravity="end"
+            android:layout_weight="1"
+            android:text="65分"/>
+    </LinearLayout>
+
+</LinearLayout>

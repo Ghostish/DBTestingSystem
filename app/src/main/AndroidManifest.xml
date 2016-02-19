@@ -24,6 +24,9 @@
         <activity android:name=".activity.TestActivity" android:parentActivityName=".activity.StudentMainActivity"/>
         <activity android:name=".activity.TeacherChooseUnmarkedActivity"/>
         <activity android:name=".activity.TeacherMarkActivity"/>
+        <activity android:name=".activity.TeacherViewGradeActivity"/>
+        <activity android:name=".activity.DeanManageActivity"/>
+        <activity android:name=".activity.ShowStatisticsActivity" android:theme="@style/DialogStyle"/>
     </application>
 
 </manifest>

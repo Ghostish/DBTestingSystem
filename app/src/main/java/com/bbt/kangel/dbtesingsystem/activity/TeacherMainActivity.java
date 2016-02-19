@@ -69,6 +69,11 @@ public class TeacherMainActivity extends AppCompatActivity implements View.OnCli
                 selectPaperDialogFragment.show(getSupportFragmentManager(), "select");
                 break;
             }
+            case R.id.show_result: {
+                Intent intent = new Intent(TeacherMainActivity.this, TeacherViewGradeActivity.class);
+                startActivity(intent);
+                break;
+            }
             case R.id.logout_button: {
                 ConfirmAlertDialogFragment f = ConfirmAlertDialogFragment.newInstance(R.style.DialogStyle, getString(R.string.title_logout), getString(R.string.msg_logout));
                 f.show(getSupportFragmentManager(), "logoutDialog");

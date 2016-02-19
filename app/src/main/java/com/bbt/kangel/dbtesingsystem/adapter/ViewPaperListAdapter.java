@@ -41,9 +41,9 @@ public class ViewPaperListAdapter extends RecyclerView.Adapter<ViewPaperListAdap
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pid = Integer.parseInt(holder.pidText.getText().toString());
+                    String pid = holder.pidText.getText().toString();
                     Bundle bundle = new Bundle();
-                    bundle.putInt("PID", pid);
+                    bundle.putString("PID", pid);
                     /*context.startActivity(intent);
                     ((DialogActivity) context).dismissDialog();*/
                     if(context instanceof DialogActivity){

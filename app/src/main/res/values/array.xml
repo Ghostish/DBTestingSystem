@@ -5,4 +5,10 @@
         <item>老师</item>
         <item>教务员</item>
     </string-array>
+    <string-array name="order_rules">
+        <item>按学号排序</item>
+        <item>按姓名排序</item>
+        <item>按试卷编号排序</item>
+        <item>按分数排序</item>
+    </string-array>
 </resources>

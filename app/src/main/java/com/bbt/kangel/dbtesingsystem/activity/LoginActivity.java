@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         c.close();
                         break;
                     case 2://deans
-                        c = db.rawQuery("select * from teachers where DNO = ? and PASSWORD = ?", selectionArgs);
+                        c = db.rawQuery("select * from deans where DNO = ? and PASSWORD = ?", selectionArgs);
                         if (c.getCount() == 1) {
                             /*write to sharePreferences to save user's info ,including user's type and user's ID(SNO,TNO,or DNO)*/
                             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);

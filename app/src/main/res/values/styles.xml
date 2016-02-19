@@ -20,5 +20,6 @@
         <item name="colorAccent">@color/RedColorPrimary</item>
         <!-- Used for the title and text -->
         <item name="android:textColorPrimary">@color/BlueColorPrimary</item>
+        <item name="windowNoTitle">true</item>
     </style>
 </resources>

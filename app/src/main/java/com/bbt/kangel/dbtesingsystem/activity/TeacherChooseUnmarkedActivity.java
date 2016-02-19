@@ -21,7 +21,7 @@ import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
 public class TeacherChooseUnmarkedActivity extends AppCompatActivity implements RecyclerViewActivity {
     private SQLiteDatabase db;
     private Cursor c;
-    private int PID;
+    private String PID;
     private TeacherViewGradeAdapter adapter;
 
     @Override
@@ -32,7 +32,7 @@ public class TeacherChooseUnmarkedActivity extends AppCompatActivity implements 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
-            PID = bundle.getInt("PID");
+            PID = bundle.getString("PID");
             RecyclerView rv = (RecyclerView) findViewById(R.id.recycle_view);
             rv.setHasFixedSize(true);
             rv.setLayoutManager(new LinearLayoutManager(this));
@@ -50,7 +50,7 @@ public class TeacherChooseUnmarkedActivity extends AppCompatActivity implements 
         super.onRestart();
         c.close();
         c = TestDataBaseUtil.getPaperUnmarked(db, PID);
-        adapter.updataCursor(c);
+        adapter.updateCursor(c);
         adapter.notifyDataSetChanged();
     }
 

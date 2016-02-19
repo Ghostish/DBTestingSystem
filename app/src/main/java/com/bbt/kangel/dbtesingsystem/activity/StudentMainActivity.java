@@ -25,10 +25,10 @@ public class StudentMainActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_student_main);
         TextView nameText = (TextView) findViewById(R.id.name);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String name = preferences.getString("name",null);
-       if(name != null){
-           nameText.setText(getString(R.string.student_welcome,name));
-       }
+        String name = preferences.getString("name", null);
+        if (name != null) {
+            nameText.setText(getString(R.string.student_welcome, name));
+        }
 
     }
 

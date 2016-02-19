@@ -15,9 +15,10 @@
         app:title="@string/title_view_grade"
         app:titleTextColor="?android:textColorPrimaryInverse"/>
 
-    <FrameLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/coordinatorLayout">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle_view"
@@ -30,6 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:background="@drawable/toolbar_shadow" />
-    </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

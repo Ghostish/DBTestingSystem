@@ -245,15 +245,14 @@ public class TeacherMarkActivity extends AppCompatActivity implements View.OnCli
 
     public static class MarkFragment extends Fragment {
         private int type;
-        private int position;
         private int qid;
+        private String markScoreIndicatorString;
         private AppCompatSeekBar scoreBar;
 
         static MarkFragment newInstance(Bundle args) {
             MarkFragment f = new MarkFragment();
             f.setArguments(args);
             f.type = args.getInt("type");
-            f.position = args.getInt("position");
             f.qid = args.getInt("qid");
             return f;
         }
@@ -263,6 +262,7 @@ public class TeacherMarkActivity extends AppCompatActivity implements View.OnCli
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View v = inflater.inflate(R.layout.fragment_mark, container, false);
             Bundle args = getArguments();
+            markScoreIndicatorString = getString(R.string.score_indicator);
             if (args != null) {
                 TextView contentText = (TextView) v.findViewById(R.id.content);
                 final TextView scoreText = (TextView) v.findViewById(R.id.text_score);
@@ -274,7 +274,7 @@ public class TeacherMarkActivity extends AppCompatActivity implements View.OnCli
                 scoreBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        scoreText.setText(progress + "分");
+                        scoreText.setText(String.format(markScoreIndicatorString, progress));
                     }
 
                     @Override

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DBTesingSystem</string>
+    <string name="app_name">DBTestingSystem</string>
     <string name="hint_username">用户名</string>
     <string name="hint_password">密码</string>
     <string name="hint_input_score">请输入评分：</string>
@@ -48,4 +48,10 @@
     <string name="dean_welcome">%1$s教务员</string>
     <string name="msg_quit_mark">您的批改将不会被保存</string>
     <string name="msg_submit_mark">请确保您已经完成批改</string>
+    <string name="account_management">人员管理</string>
+    <string name="view_people_list">人员信息</string>
+    <string name="label_max_grade">最高分</string>
+    <string name="label_min_grade">最低分</string>
+    <string name="label_average_grade">平均分</string>
+    <string name="Label_statistics">统计信息</string>
 </resources>

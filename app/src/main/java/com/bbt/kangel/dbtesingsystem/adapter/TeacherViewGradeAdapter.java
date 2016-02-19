@@ -51,8 +51,8 @@ public class TeacherViewGradeAdapter extends RecyclerView.Adapter<TeacherViewGra
         holder.text_name.setText(cursor.getString(cursor.getColumnIndex("SNAME")));
         String GRADE = cursor.getString(cursor.getColumnIndex("GRADE"));
         holder.text_grade.setText(GRADE);
-        int PAPER_ID = cursor.getInt(cursor.getColumnIndex("PID"));
-        holder.text_pid.setText(PAPER_ID+"");
+        String PAPER_ID = cursor.getString(cursor.getColumnIndex("PID"));
+        holder.text_pid.setText(PAPER_ID);
         if (!holder.itemView.hasOnClickListeners()) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,7 +73,7 @@ public class TeacherViewGradeAdapter extends RecyclerView.Adapter<TeacherViewGra
         return cursor.getCount();
     }
 
-    public void updataCursor(Cursor c) {
+    public void updateCursor(Cursor c) {
         this.cursor = c;
     }
 }

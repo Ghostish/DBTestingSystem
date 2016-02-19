@@ -2,7 +2,6 @@ package com.bbt.kangel.dbtesingsystem.util;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 /**
  * Created by Kangel on 2015/12/13.
@@ -10,24 +9,22 @@ import android.util.Log;
 public class TestDataBaseUtil {
     static final int STUDENT = 0, TEACHER = 1;
 
-    public static Cursor getPeopleList(SQLiteDatabase db, int type) {
-        switch (type) {
-            case STUDENT:
-                return db.rawQuery("select * from students", null);
-            case TEACHER:
-                return db.rawQuery("select * from teachers", null);
-            default:
-                return null;
-        }
+    public static Cursor getPeopleList(SQLiteDatabase db,String notInClause) {
+        notInClause = notInClause != null ? notInClause : "('')";
+        return db.rawQuery("select NAME, ID, TYPE from(\n" +
+                "select SNAME NAME, SNO ID, 0 TYPE from students\n" +
+                " union\n" +
+                " select TNAME NAME, TNO ID, 1 TYPE from teachers\n" +
+                " ) where ID not in " + notInClause, null);
     }
 
     public static Cursor getPaperList(SQLiteDatabase db) {
         return db.rawQuery("select * from papers order by PID", null);
     }
 
-    public static Cursor getPaperUnmarked(SQLiteDatabase db, int PID) {
+    public static Cursor getPaperUnmarked(SQLiteDatabase db, String PID) {
         Cursor c;
-        c = db.rawQuery("select x.SNO ,SNAME ,'unmarked' GRADE , ? PID from students x  where exists (select * from students y, gapAnswers  where PID = ? and x.SNO = y.SNO and gapAnswers.SNO = y.SNO  and gapAnswers.isMarked = 0) or exists (select * from students z, essayAnswers  where PID = ? and x.SNO = z.SNO and essayAnswers.SNO = z.SNO  and essayAnswers.isMarked = 0)", new String[]{PID + "", PID + "", PID + ""});
+        c = db.rawQuery("select x.SNO ,SNAME ,'unmarked' GRADE , ? PID from students x  where exists (select * from students y, gapAnswers  where PID = ? and x.SNO = y.SNO and gapAnswers.SNO = y.SNO  and gapAnswers.isMarked = 0) or exists (select * from students z, essayAnswers  where PID = ? and x.SNO = z.SNO and essayAnswers.SNO = z.SNO  and essayAnswers.isMarked = 0)", new String[]{PID , PID, PID});
         return c;
     }
 
@@ -47,21 +44,11 @@ public class TestDataBaseUtil {
     }
 
     public static Cursor getGradeDetail(SQLiteDatabase db, String SNO) {
-        /*int [] result = new int[3];
-        Cursor c = db.rawQuery("select sum(SCORE) SUM from choiceAnswers where SNO = ? and PID = ?",new String[]{SNO,1 + ""});
-        c.moveToPosition(0);
-        result[0] = c.getInt(c.getColumnIndex("SUM"));
-        c.close();
-        c = db.rawQuery("select sum(SCORE) SUM from gapAnswers where SNO = ? and PID = ?",new String[]{SNO,1 + ""});
-        c.moveToPosition(0);
-        result[1] = c.getInt(c.getColumnIndex("SUM"));
-        c.close();
-        c = db.rawQuery("select sum(SCORE) SUM from essayAnswers where SNO = ? and PID = ?",new String[]{SNO,1 + ""});
-        c.moveToPosition(0);
-        result[2] = c.getInt(c.getColumnIndex("SUM"));
-        c.close();*/
-        // return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore,gapScore,essayScore where choiceScore.SNO = ? and gapScore.SNO = ? and essayScore.SNO = ? and choiceScore.PID = gapScore.PID and choiceScore.PID = essayScore.PID",new String[]{SNO,SNO,SNO});
-        return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore  left join gapScore on choiceScore.PID = gapScore.PID left join essayScore on essayScore.PID = gapScore.PID where choiceScore.SNO = ? ", new String[]{SNO});
+        return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore  left join gapScore on choiceScore.PID = gapScore.PID left join essayScore on essayScore.PID = gapScore.PID where choiceScore.SNO = ? and gapScore.SNO = ? and essayScore.SNO = ?", new String[]{SNO, SNO, SNO});
+    }
+
+    public static Cursor getGradesList(SQLiteDatabase db,String PID, String orderBy) {
+        return db.rawQuery("select grades.*,SNAME from grades,students where students.SNO = grades.SNO  and PID = " + PID +" order by " + orderBy, null);
     }
 
     /*返回一张考卷的具体内容

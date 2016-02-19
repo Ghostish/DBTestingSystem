@@ -33,11 +33,9 @@ import android.widget.Toast;
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.fragment.ConfirmAlertDialogFragment;
 import com.bbt.kangel.dbtesingsystem.fragment.GotoQuestionDialogFragment;
+import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
 import com.bbt.kangel.dbtesingsystem.util.DialogActivity;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
-import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
-
-import junit.framework.Test;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -66,7 +64,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     private TestAdapter mAdapter;
     private DataBaseHelper helper;
     private SQLiteDatabase db;
-    private int PID;
+    private String PID;
     private String SNO;
     private ProgressDialog progressDialog;
     private ConfirmAlertDialogFragment confirmQuitDialog, confirmSubmitDialog;
@@ -79,9 +77,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_test);
         Bundle bundle = getIntent().getExtras();
-        PID = 0;
         if (bundle != null) {
-            PID = bundle.getInt("PID");
+            PID = bundle.getString("PID");
         } else {
             Log.e("error", "no valid paper id");
             this.finish();
@@ -240,7 +237,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         return db;
     }
 
-    private int getPID() {
+    private String getPID() {
         return PID;
     }
 
@@ -574,7 +571,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         public void commitToDataBase() {
             // TODO: 2015/12/14 commit data to db
             SQLiteDatabase db = ((TestActivity) context).getDataBase();
-            int PID = ((TestActivity) context).getPID();
+            String PID = ((TestActivity) context).getPID();
             String SNO = ((TestActivity) context).getSNO();
             switch (TYPE) {
                 case CHOICE: {

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        app:title="@string/title_view_grade"
+        app:titleTextColor="?android:textColorPrimaryInverse">
+
+        <ImageButton
+            android:id="@+id/show_statistics_button"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="end"
+            android:background="?android:selectableItemBackground"
+            android:onClick="onClick"
+            android:src="@drawable/ic_tap_statistics" />
+
+        <ImageButton
+            android:id="@+id/order_button"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="end"
+            android:background="?android:selectableItemBackground"
+            android:contentDescription="@string/submit"
+            android:onClick="onClick"
+            android:src="@drawable/ic_tap_order" />
+
+        <ImageButton
+            android:id="@+id/show_filter_button"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="end"
+            android:background="?android:selectableItemBackground"
+            android:onClick="onClick"
+            android:src="@drawable/ic_tap_filter" />
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/BlueColorPrimary"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner_filter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:spinnerMode="dropdown" />
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner_order"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="true"
+            android:padding="8dp" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/toolbar_shadow" />
+
+        <RadioGroup
+            android:id="@+id/order_rule_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lighter_background"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:visibility="gone">
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/button_by_sname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/order_by_sname" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/button_by_sno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/order_by_sno" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/button_by_pid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/order_by_pid" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/button_by_grade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/order_by_grade" />
+        </RadioGroup>
+    </FrameLayout>
+
+</LinearLayout>
