@@ -48,10 +48,16 @@
     <string name="dean_welcome">%1$s教务员</string>
     <string name="msg_quit_mark">您的批改将不会被保存</string>
     <string name="msg_submit_mark">请确保您已经完成批改</string>
+    <string name="order_by_sno">按学号排序</string>
+    <string name="order_by_sname">按姓名排序</string>
+    <string name="order_by_pid">按试卷编号排序</string>
+    <string name="order_by_grade">按分数排序</string>
     <string name="account_management">人员管理</string>
     <string name="view_people_list">人员信息</string>
     <string name="label_max_grade">最高分</string>
     <string name="label_min_grade">最低分</string>
     <string name="label_average_grade">平均分</string>
     <string name="Label_statistics">统计信息</string>
+    <string name="label_grade_zone">分数区间(分)</string>
+    <string name="reset_button">重置</string>
 </resources>

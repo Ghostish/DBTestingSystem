@@ -23,7 +23,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             "create table choiceAnswers(SNO varchar(12) references students(SNO), PID integer references papers(PID),QID integer references choiceQuestion(QID) , ANSWER char(1) check(ANSWER in ('A','B','C','D','#')) ,SCORE integer, primary key(SNO,PID,QID));\n",
             "create table gapAnswers(SNO varchar(12) references students(SNO), PID integer references papers(PID),QID integer references gapQuestion(QID) , ANSWER varchar(50),SCORE integer default 0, ISMARKED integer check (ISMARKED in (0,1)) default 0,primary key(SNO,PID,QID));\n",
             "create table essayAnswers(SNO varchar(12) references students(SNO), PID integer references papers(PID),QID integer references essayQuestion(QID) , ANSWER varchar(300),SCORE integer default 0,ISMARKED integer check (ISMARKED in (0,1)) default 0,primary key(SNO,PID,QID));\n",
-            "create view choiceScore as select SNO,PID,SUM(SCORE) SUMSCORE from choiceAnswers group by SNO,PID",
+            "create view choieScore as select SNO,PID,SUM(SCORE) SUMSCORE from choiceAnswers group by SNO,PID",
             "create view gapScore as select SNO,PID,SUM(SCORE) SUMSCORE from gapAnswers  group by SNO,PID\n",
             "create view essayScore as select SNO,PID,SUM(SCORE) SUMSCORE from essayAnswers  group by SNO,PID",
             "create view grades as\n" +

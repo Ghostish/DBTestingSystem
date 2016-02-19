@@ -44,27 +44,6 @@
             android:src="@drawable/ic_tap_filter" />
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/BlueColorPrimary"
-        android:orientation="horizontal">
-
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/spinner_filter"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:spinnerMode="dropdown" />
-
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/spinner_order"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:spinnerMode="dropdown" />
-    </LinearLayout>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -76,11 +55,6 @@
             android:clipToPadding="true"
             android:padding="8dp" />
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@drawable/toolbar_shadow" />
 
         <RadioGroup
             android:id="@+id/order_rule_list"
@@ -115,6 +89,112 @@
                 android:layout_height="wrap_content"
                 android:text="@string/order_by_grade" />
         </RadioGroup>
+
+        <RelativeLayout
+            android:id="@+id/filter_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/lighter_background"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/grade_zone_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical|start"
+                    android:text="@string/label_grade_zone"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edit_grade_from"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="-"
+                    android:textSize="32sp" />
+
+                <EditText
+                    android:id="@+id/edit_grade_to"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/choose_pid_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/grade_zone_layout"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|start"
+                    android:text="@string/label_paper_id"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edit_pid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="numberDecimal"
+                    android:onClick="onClick" />
+            </LinearLayout>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/reset_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/ok_button"
+                android:layout_centerHorizontal="true"
+                android:background="?android:selectableItemBackground"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="@string/reset_button"
+                android:textColor="@color/RedColorPrimaryDark"
+                android:textSize="16sp" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/ok_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/BlueColorPrimary"
+                android:onClick="onClick"
+                android:text="@string/ok_button"
+                android:textColor="?android:textColorPrimaryInverse"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/toolbar_shadow" />
+
     </FrameLayout>
 
 </LinearLayout>
