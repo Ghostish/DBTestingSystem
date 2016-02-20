@@ -28,6 +28,14 @@ public class TestDataBaseUtil {
         return c;
     }
 
+    public static Cursor getQuestionsByQID(SQLiteDatabase db, String PID) {
+        return db.rawQuery("select CONTENT, ANSWER, SCORE, 0 TYPE, CHOICEA, CHOICEB, CHOICEC, CHOICED from choiceQuestion, choiceInPapers where choiceQuestion.QID = choiceInPapers.QID and choiceInPapers.PID = ?\n" +
+                "union\n" +
+                "select CONTENT, ANSWER, SCORE, 1 TYPE, null, null, null, null from gapQuestion, gapInPapers where gapQuestion.QID = gapInPapers.QID and gapInPapers.PID = ?\n" +
+                "union\n" +
+                "select CONTENT, ANSWER, SCORE, 2 TYPE, null, null, null, null from essayQuestion, essayInPapers where essayQuestion.QID = essayInPapers.QID and essayInPapers.PID = ?\n" +
+                "order by TYPE", new String[]{PID, PID, PID});
+    }
     public static Cursor getQuestionUnmarked(SQLiteDatabase db, String sno, String pid) {
         return db.rawQuery("select gapQuestion.CONTENT CONTENT,gapAnswers.ANSWER ANSWER,gapInPapers.SCORE SCORE,gapAnswers.QID QID, 1 TYPE from gapQuestion,gapAnswers,gapInPapers where ISMARKED = 0 and  gapAnswers.PID = ? and gapAnswers.SNO = ? and gapQuestion.QID = gapAnswers.QID and gapInPapers.QID = gapAnswers.QID \n" +
                 "union\n" +

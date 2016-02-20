@@ -79,7 +79,7 @@ public class StudentMainActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void onDialogItemSelect(Bundle args) {
+    public void onDialogItemSelect(String tag,Bundle args) {
         Intent intent = new Intent(StudentMainActivity.this, TestActivity.class);
         intent.putExtras(args);
         startActivity(intent);

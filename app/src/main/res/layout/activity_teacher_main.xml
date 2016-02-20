@@ -75,6 +75,15 @@
                 android:text="@string/show_result"
                 android:textColor="?android:textColorPrimaryInverse"
                 app:backgroundTint="@color/BlueColorPrimary" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/paper_management"
+                android:layout_width="150dp"
+                android:layout_height="48dp"
+                android:onClick="onClick"
+                android:text="@string/paper_management"
+                android:textColor="?android:textColorPrimaryInverse"
+                app:backgroundTint="@color/BlueColorPrimary" />
         </LinearLayout>
     </RelativeLayout>
 

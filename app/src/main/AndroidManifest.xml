@@ -27,6 +27,9 @@
         <activity android:name=".activity.TeacherViewGradeActivity"/>
         <activity android:name=".activity.DeanManageActivity"/>
         <activity android:name=".activity.ShowStatisticsActivity" android:theme="@style/DialogStyle"/>
+        <activity android:name=".activity.TeacherManagePaperActivity"/>
+        <activity android:name=".activity.TeacherManageQuestionActivity" />
+        <activity android:name=".activity.TeacherViewPaperDetailActivity"/>
     </application>
 
 </manifest>

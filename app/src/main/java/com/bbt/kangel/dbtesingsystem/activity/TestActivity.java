@@ -149,6 +149,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.submit_button: {
+                // TODO: 2016/2/20 use questionTested array to get a more accurate result
                 int leftToDo = mAdapter.getCount() - mAdapter.getMapSize();
                 String msg = "";
                 if (leftToDo != 0) {
@@ -198,9 +199,10 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onDialogItemSelect(Bundle args) {
+    public void onDialogItemSelect(String tag, Bundle args) {
 
     }
+
 
     private void mShowDialog(int type, String msg) {
         switch (type) {

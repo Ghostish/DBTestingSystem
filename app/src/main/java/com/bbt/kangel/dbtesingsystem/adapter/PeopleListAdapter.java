@@ -76,7 +76,7 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Vi
     public void onItemDismiss(int position) {
         cursor.moveToPosition(position);
         String id = cursor.getString(cursor.getColumnIndex("ID"));
-        int type = cursor.getInt(cursor.getColumnIndex("TYPE"));
+        //int type = cursor.getInt(cursor.getColumnIndex("TYPE"));
         Bundle args = new Bundle();
         args.putString("id", id);
         args.putInt("position",position);

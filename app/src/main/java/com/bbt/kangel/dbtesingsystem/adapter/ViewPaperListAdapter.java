@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.activity.TestActivity;
 import com.bbt.kangel.dbtesingsystem.util.DialogActivity;
+import com.bbt.kangel.dbtesingsystem.util.RecyclerViewActivity;
 
 /**
  * Created by Kangel on 2015/12/14.
@@ -47,7 +48,9 @@ public class ViewPaperListAdapter extends RecyclerView.Adapter<ViewPaperListAdap
                     /*context.startActivity(intent);
                     ((DialogActivity) context).dismissDialog();*/
                     if(context instanceof DialogActivity){
-                        ((DialogActivity) context).onDialogItemSelect(bundle);
+                        ((DialogActivity) context).onDialogItemSelect("selectPaper",bundle);
+                    }else if (context instanceof RecyclerViewActivity) {
+                        ((RecyclerViewActivity) context).onRecyclerViewItemSelect(bundle);
                     }
                 }
             });

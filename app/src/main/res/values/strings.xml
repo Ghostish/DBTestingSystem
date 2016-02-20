@@ -60,4 +60,9 @@
     <string name="Label_statistics">统计信息</string>
     <string name="label_grade_zone">分数区间(分)</string>
     <string name="reset_button">重置</string>
+    <string name="paper_management">试题管理</string>
+    <string name="title_paper_management">试卷管理</string>
+    <string name="hint_reference_answers">参考答案</string>
+    <string name="question_with_score">%1$d. %2$s（%3$d分）</string>
+    <string name="title_view_paper_detail">试卷详情</string>
 </resources>

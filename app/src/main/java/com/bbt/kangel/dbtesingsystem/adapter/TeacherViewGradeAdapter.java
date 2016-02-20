@@ -60,7 +60,7 @@ public class TeacherViewGradeAdapter extends RecyclerView.Adapter<TeacherViewGra
                     if(context instanceof RecyclerViewActivity){
                         Bundle args = new Bundle();
                         args.putString("sno", cursor.getString(cursor.getColumnIndex("SNO")));
-                        args.putInt("pid",cursor.getInt(cursor.getColumnIndex("PID")));
+                        args.putString("pid",cursor.getString(cursor.getColumnIndex("PID")));
                         ((RecyclerViewActivity) context).onRecyclerViewItemSelect(args);
                     }
                 }

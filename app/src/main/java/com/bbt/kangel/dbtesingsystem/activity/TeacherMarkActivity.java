@@ -47,8 +47,8 @@ public class TeacherMarkActivity extends AppCompatActivity implements View.OnCli
     private Cursor cursor;
     private SQLiteDatabase db;
     private String SNO;
+    private String PID;
     private Handler handler;
-    private int PID;
     private ViewPager pager;
     private Toolbar toolbar;
     private String indicatorString;
@@ -64,14 +64,14 @@ public class TeacherMarkActivity extends AppCompatActivity implements View.OnCli
         handler = new mHandler(TeacherMarkActivity.this);
         if (args != null) {
             SNO = args.getString("sno");
-            PID = args.getInt("pid");
+            PID = args.getString("pid");
             mShowDialog(PROGRESS, getString(R.string.paper_loading));
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     DataBaseHelper dataBaseHelper = new DataBaseHelper(TeacherMarkActivity.this, GlobalKeeper.DB_NAME, 1);
                     db = dataBaseHelper.getWritableDatabase();
-                    cursor = TestDataBaseUtil.getQuestionUnmarked(db, SNO, PID + "");
+                    cursor = TestDataBaseUtil.getQuestionUnmarked(db, SNO, PID );
                     Log.d("count", cursor.getCount() + "");
                     Log.d("sno ,pid", SNO + " " + PID);
                     try {
@@ -152,9 +152,10 @@ public class TeacherMarkActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void onDialogItemSelect(Bundle args) {
+    public void onDialogItemSelect(String tag, Bundle args) {
 
     }
+
 
     private void mShowDialog(int type, String msg) {
         switch (type) {
@@ -221,7 +222,7 @@ public class TeacherMarkActivity extends AppCompatActivity implements View.OnCli
         private WeakReference<TeacherMarkActivity> mActivity;
 
         public mHandler(TeacherMarkActivity activity) {
-            this.mActivity = new WeakReference<TeacherMarkActivity>(activity);
+            this.mActivity = new WeakReference<>(activity);
         }
 
         @Override

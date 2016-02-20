@@ -41,8 +41,9 @@ public class DeanManageActivity extends AppCompatActivity implements View.OnClic
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         paramOnClickListener = new ParamOnClickListener();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(getString(R.string.view_people_list));
+        toolbar.setTitle(R.string.view_people_list);
         toolbar.setNavigationOnClickListener(this);
 
         DataBaseHelper helper = new DataBaseHelper(DeanManageActivity.this, GlobalKeeper.DB_NAME, 1);
@@ -62,6 +63,7 @@ public class DeanManageActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     protected void onDestroy() {
+        // TODO: 2016/2/20 use thread to do the following task
         super.onDestroy();
         String inClause = deleteList.toString();
         Log.i("inClause", inClause);

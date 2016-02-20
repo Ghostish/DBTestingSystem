@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bbt.kangel.dbtesingsystem.R;
+import com.bbt.kangel.dbtesingsystem.fragment.ChooseItemDialogFragment;
 import com.bbt.kangel.dbtesingsystem.fragment.ConfirmAlertDialogFragment;
 import com.bbt.kangel.dbtesingsystem.fragment.SelectPaperDialogFragment;
 import com.bbt.kangel.dbtesingsystem.util.DialogActivity;
@@ -19,6 +20,7 @@ import com.bbt.kangel.dbtesingsystem.util.DialogActivity;
  */
 public class TeacherMainActivity extends AppCompatActivity implements View.OnClickListener, DialogActivity {
     private SelectPaperDialogFragment selectPaperDialogFragment;
+    private ChooseItemDialogFragment chooseItemDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +28,9 @@ public class TeacherMainActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_teacher_main);
         TextView nameText = (TextView) findViewById(R.id.name);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String name = preferences.getString("name",null);
-        if(name != null){
-            nameText.setText(getString(R.string.teacher_welcome,name));
+        String name = preferences.getString("name", null);
+        if (name != null) {
+            nameText.setText(getString(R.string.teacher_welcome, name));
         }
     }
 
@@ -52,11 +54,26 @@ public class TeacherMainActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void onDialogItemSelect(Bundle args) {
-        Intent intent = new Intent(TeacherMainActivity.this, TeacherChooseUnmarkedActivity.class);
-        intent.putExtras(args);
-        startActivity(intent);
-        selectPaperDialogFragment.dismiss();
+    public void onDialogItemSelect(String tag,Bundle args) {
+        switch (tag) {
+            case "selectPaper": {
+                Intent intent = new Intent(TeacherMainActivity.this, TeacherChooseUnmarkedActivity.class);
+                intent.putExtras(args);
+                startActivity(intent);
+                selectPaperDialogFragment.dismiss();
+                break;
+            }
+            case "chooseWhich": {
+                int which = args.getInt("which");
+                Intent intent = new Intent();
+                Class jumpTo = which == 0 ? TeacherManagePaperActivity.class : TeacherManageQuestionActivity.class;
+                intent.setClass(TeacherMainActivity.this, jumpTo);
+                startActivity(intent);
+                chooseItemDialogFragment.dismiss();
+                break;
+            }
+        }
+
     }
 
     @Override
@@ -66,12 +83,19 @@ public class TeacherMainActivity extends AppCompatActivity implements View.OnCli
                 if (selectPaperDialogFragment == null) {
                     selectPaperDialogFragment = new SelectPaperDialogFragment();
                 }
-                selectPaperDialogFragment.show(getSupportFragmentManager(), "select");
+                selectPaperDialogFragment.show(getSupportFragmentManager(), "selectPaper");
                 break;
             }
             case R.id.show_result: {
                 Intent intent = new Intent(TeacherMainActivity.this, TeacherViewGradeActivity.class);
                 startActivity(intent);
+                break;
+            }
+            case R.id.paper_management: {
+                if (chooseItemDialogFragment == null) {
+                    chooseItemDialogFragment = ChooseItemDialogFragment.newInstance(R.array.paper_question_management);
+                }
+                chooseItemDialogFragment.show(getSupportFragmentManager(), "chooseWhich");
                 break;
             }
             case R.id.logout_button: {

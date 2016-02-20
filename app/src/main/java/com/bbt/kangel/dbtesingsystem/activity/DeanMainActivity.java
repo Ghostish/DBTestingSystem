@@ -64,7 +64,7 @@ public class DeanMainActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onDialogItemSelect(Bundle args) {
+    public void onDialogItemSelect(String tag, Bundle args) {
 
     }
 }
