@@ -3,6 +3,8 @@ package com.bbt.kangel.dbtesingsystem.util;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.Collection;
+
 /**
  * Created by Kangel on 2015/12/13.
  */
@@ -28,7 +30,7 @@ public class TestDataBaseUtil {
         return c;
     }
 
-    public static Cursor getQuestionsByQID(SQLiteDatabase db, String PID) {
+    public static Cursor getQuestionsByPID(SQLiteDatabase db, String PID) {
         return db.rawQuery("select CONTENT, ANSWER, SCORE, 0 TYPE, CHOICEA, CHOICEB, CHOICEC, CHOICED from choiceQuestion, choiceInPapers where choiceQuestion.QID = choiceInPapers.QID and choiceInPapers.PID = ?\n" +
                 "union\n" +
                 "select CONTENT, ANSWER, SCORE, 1 TYPE, null, null, null, null from gapQuestion, gapInPapers where gapQuestion.QID = gapInPapers.QID and gapInPapers.PID = ?\n" +
@@ -36,10 +38,40 @@ public class TestDataBaseUtil {
                 "select CONTENT, ANSWER, SCORE, 2 TYPE, null, null, null, null from essayQuestion, essayInPapers where essayQuestion.QID = essayInPapers.QID and essayInPapers.PID = ?\n" +
                 "order by TYPE", new String[]{PID, PID, PID});
     }
+
     public static Cursor getQuestionUnmarked(SQLiteDatabase db, String sno, String pid) {
         return db.rawQuery("select gapQuestion.CONTENT CONTENT,gapAnswers.ANSWER ANSWER,gapInPapers.SCORE SCORE,gapAnswers.QID QID, 1 TYPE from gapQuestion,gapAnswers,gapInPapers where ISMARKED = 0 and  gapAnswers.PID = ? and gapAnswers.SNO = ? and gapQuestion.QID = gapAnswers.QID and gapInPapers.QID = gapAnswers.QID \n" +
                 "union\n" +
                 " select essayQuestion.CONTENT CONTENT,essayAnswers.ANSWER ANSWER,essayInPapers.SCORE SCORE,essayAnswers.QID QID,2 TYPE from essayQuestion,essayAnswers,essayInPapers where  ISMARKED = 0 and essayAnswers.PID = ? and essayAnswers.SNO = ? and essayQuestion.QID = essayAnswers.QID and essayInPapers.QID = essayAnswers.QID\n", new String[]{pid, sno, pid, sno});
+    }
+
+    public static Cursor getQuestionCount(SQLiteDatabase db) {
+        return db.rawQuery("select count(*) COUNT, 0 TYPE from choiceQuestion\n" +
+                "union all\n" +
+                "select count(*) COUNT, 1 TYPE from gapQuestion\n" +
+                "union all\n" +
+                "select count(*) COUNT, 2 TYPE from essayQuestion\n" +
+                "order by TYPE", null);
+    }
+
+    public static Cursor getGradeDetail(SQLiteDatabase db, String SNO) {
+        return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore  left join gapScore on choiceScore.PID = gapScore.PID left join essayScore on essayScore.PID = gapScore.PID where choiceScore.SNO = ? and gapScore.SNO = ? and essayScore.SNO = ?", new String[]{SNO, SNO, SNO});
+    }
+
+    public static Cursor getGradesList(SQLiteDatabase db, String PID, String orderBy, String fromGrade, String toGrade) {
+        return db.rawQuery("select grades.*,SNAME from grades,students where students.SNO = grades.SNO  and PID = " + PID + " and GRADE between " + fromGrade + " and " + toGrade + " order by " + orderBy, null);
+    }
+
+    public static Cursor getQuestionByTYPE(SQLiteDatabase db, int type) {
+        switch (type) {
+            case GlobalKeeper.TYPE_CHOICE:
+                return db.rawQuery("select *, 0 TYPE from choiceQuestion order by QID", null);
+            case GlobalKeeper.TYPE_GAP:
+                return db.rawQuery("select *, 1 TYPE from gapQuestion order by QID", null);
+            case GlobalKeeper.TYPE_ESSAY:
+                return db.rawQuery("select *, 2 TYPE from essayQuestion order by QID", null);
+        }
+        return null;
     }
 
     /*return a cursor with column SNO,SNAME,PID,GRADE*/
@@ -49,14 +81,6 @@ public class TestDataBaseUtil {
         } else {
             return db.rawQuery("select grades.SNO SNO,SNAME,PID,GRADE from grades ,students where grades.SNO = students.SNO", null);
         }
-    }
-
-    public static Cursor getGradeDetail(SQLiteDatabase db, String SNO) {
-        return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore  left join gapScore on choiceScore.PID = gapScore.PID left join essayScore on essayScore.PID = gapScore.PID where choiceScore.SNO = ? and gapScore.SNO = ? and essayScore.SNO = ?", new String[]{SNO, SNO, SNO});
-    }
-
-    public static Cursor getGradesList(SQLiteDatabase db, String PID, String orderBy, String fromGrade, String toGrade) {
-        return db.rawQuery("select grades.*,SNAME from grades,students where students.SNO = grades.SNO  and PID = " + PID + " and GRADE between " + fromGrade + " and " + toGrade + " order by " + orderBy, null);
     }
 
     /*返回一张考卷的具体内容

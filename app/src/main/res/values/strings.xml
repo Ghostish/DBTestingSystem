@@ -61,8 +61,25 @@
     <string name="label_grade_zone">分数区间(分)</string>
     <string name="reset_button">重置</string>
     <string name="paper_management">试题管理</string>
-    <string name="title_paper_management">试卷管理</string>
+    <string name="title_view_paper_abstract">试卷概览</string>
     <string name="hint_reference_answers">参考答案</string>
     <string name="question_with_score">%1$d. %2$s（%3$d分）</string>
+    <string name="question_without_score">%1$d. %2$s</string>
     <string name="title_view_paper_detail">试卷详情</string>
+    <string name="title_view_question_abstract">题库概览</string>
+    <string name="label_choice">选择题（%1$d）</string>
+    <string name="label_gap">填空题（%1$d）</string>
+    <string name="label_essay">问答题（%1$d）</string>
+    <string name="title_choice">选择题</string>
+    <string name="title_gap">填空题</string>
+    <string name="title_essay">问答题</string>
+
+    <string name="hint_question_content">题目</string>
+    <string name="hint_question_answer" >参考答案</string>
+    <string name="title_add_question_content">添加题目</string>
+    <string name="next_step">下一步 &#62;</string>
+    <string name="previous_step">&#60; 上一步</string>
+    <string name="desc_add_question">通过简单几步来添加一道新试题</string>
+    <string name="title_add_question_answer">添加参考答案</string>
+    <string name="finish">完成</string>
 </resources>

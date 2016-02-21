@@ -28,7 +28,7 @@ public class TeacherManagePaperActivity extends AppCompatActivity implements Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_paper_management);
+        setContentView(R.layout.activity_teacher_paper_question_management);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(this);
@@ -37,7 +37,7 @@ public class TeacherManagePaperActivity extends AppCompatActivity implements Vie
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(TeacherManagePaperActivity.this));
         DataBaseHelper helper = new DataBaseHelper(TeacherManagePaperActivity.this, GlobalKeeper.DB_NAME, 1);
-        db = helper.getReadableDatabase();
+        db = helper.getWritableDatabase();
         c = TestDataBaseUtil.getPaperList(db);
         ViewPaperListAdapter adapter = new ViewPaperListAdapter(TeacherManagePaperActivity.this, c);
         recyclerView.setAdapter(adapter);

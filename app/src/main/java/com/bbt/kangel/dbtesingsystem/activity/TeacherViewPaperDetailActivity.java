@@ -44,8 +44,8 @@ public class TeacherViewPaperDetailActivity extends AppCompatActivity implements
         rv.setLayoutManager(new LinearLayoutManager(this));
         DataBaseHelper helper = new DataBaseHelper(TeacherViewPaperDetailActivity.this, GlobalKeeper.DB_NAME, 1);
         db = helper.getReadableDatabase();
-        cursor = TestDataBaseUtil.getQuestionsByQID(db, PID);
-        ViewQuestionListAdapter adapter = new ViewQuestionListAdapter(TeacherViewPaperDetailActivity.this, cursor,false);
+        cursor = TestDataBaseUtil.getQuestionsByPID(db, PID);
+        ViewQuestionListAdapter adapter = new ViewQuestionListAdapter(TeacherViewPaperDetailActivity.this, cursor,false,true);
         rv.setAdapter(adapter);
 
     }

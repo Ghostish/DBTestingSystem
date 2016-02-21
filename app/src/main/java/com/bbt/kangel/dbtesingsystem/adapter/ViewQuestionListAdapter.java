@@ -23,16 +23,22 @@ public class ViewQuestionListAdapter extends RecyclerView.Adapter<ViewQuestionLi
     private Context context;
     private Cursor cursor;
     private boolean itemClickable;
+    private boolean showScore;
     private String contentFormatString;
 
     private int selectedBackGround, unselectedBackGround;
     private boolean[] selectedArray;
 
-    public ViewQuestionListAdapter(Context context, Cursor cursor, boolean itemClickable) {
+    public ViewQuestionListAdapter(Context context, Cursor cursor, boolean itemClickable, boolean showScore) {
         this.context = context;
         this.cursor = cursor;
         this.itemClickable = itemClickable;
-        contentFormatString = context.getString(R.string.question_with_score);
+        this.showScore = showScore;
+        if (showScore) {
+            contentFormatString = context.getString(R.string.question_with_score);
+        } else {
+            contentFormatString = context.getString(R.string.question_without_score);
+        }
         if (itemClickable) {
             selectedBackGround = ContextCompat.getColor(context, R.color.lightGrey);
             unselectedBackGround = ContextCompat.getColor(context, R.color.transparent);
@@ -67,7 +73,11 @@ public class ViewQuestionListAdapter extends RecyclerView.Adapter<ViewQuestionLi
     public void onBindViewHolder(final ViewHolder holder, int position) {
         cursor.moveToPosition(position);
         int type = cursor.getInt(cursor.getColumnIndex("TYPE"));
-        holder.contentText.setText(String.format(contentFormatString, position + 1, cursor.getString(cursor.getColumnIndex("CONTENT")), cursor.getInt(cursor.getColumnIndex("SCORE"))));
+        if (showScore) {
+            holder.contentText.setText(String.format(contentFormatString, position + 1, cursor.getString(cursor.getColumnIndex("CONTENT")), cursor.getInt(cursor.getColumnIndex("SCORE"))));
+        } else {
+            holder.contentText.setText(String.format(contentFormatString, position + 1, cursor.getString(cursor.getColumnIndex("CONTENT"))));
+        }
         if (type == GlobalKeeper.TYPE_CHOICE) {
             holder.buttonA.setText(cursor.getString(cursor.getColumnIndex("CHOICEA")));
             holder.buttonB.setText(cursor.getString(cursor.getColumnIndex("CHOICEB")));

@@ -30,6 +30,8 @@
         <activity android:name=".activity.TeacherManagePaperActivity"/>
         <activity android:name=".activity.TeacherManageQuestionActivity" />
         <activity android:name=".activity.TeacherViewPaperDetailActivity"/>
+        <activity android:name=".activity.TeacherViewQuestionDetailActivity"/>
+        <activity android:name=".activity.TeacherAddNewTextQuestionActivity"/>
     </application>
 
 </manifest>

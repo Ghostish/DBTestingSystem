@@ -48,7 +48,8 @@ public class ViewPaperListAdapter extends RecyclerView.Adapter<ViewPaperListAdap
                     /*context.startActivity(intent);
                     ((DialogActivity) context).dismissDialog();*/
                     if(context instanceof DialogActivity){
-                        ((DialogActivity) context).onDialogItemSelect("selectPaper",bundle);
+                        // TODO: 2016/2/21 use a tag variable to save the selectPaper tag
+                        ((DialogActivity) context).onDialogItemSelect("selectPaper", bundle);
                     }else if (context instanceof RecyclerViewActivity) {
                         ((RecyclerViewActivity) context).onRecyclerViewItemSelect(bundle);
                     }

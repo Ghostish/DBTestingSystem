@@ -12,7 +12,7 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-        app:title="@string/title_paper_management"
+        app:title="@string/title_view_paper_abstract"
         app:titleTextColor="?android:textColorPrimaryInverse" />
 
     <android.support.design.widget.CoordinatorLayout
