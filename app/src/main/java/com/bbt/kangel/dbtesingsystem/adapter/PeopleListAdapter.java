@@ -18,7 +18,7 @@ import com.bbt.kangel.dbtesingsystem.util.ItemTouchHelperAdapter;
 /**
  * Created by Kangel on 2016/2/18.
  */
-public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.ViewHolder> implements ItemTouchHelperAdapter {
+public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.ViewHolder> {
     private Context context;
     private Cursor cursor;
 
@@ -67,7 +67,7 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Vi
         return cursor.getCount();
     }
 
-    @Override
+   /* @Override
     public void onItemMove(int fromPosition, int toPosition) {
 
     }
@@ -84,7 +84,7 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Vi
         if (context instanceof ItemTouchHelperActivity) {
             ((ItemTouchHelperActivity) context).onItemSwiped(args);
         }
-    }
+    }*/
 
     public void updateCursor(Cursor cursor) {
         this.cursor = cursor;

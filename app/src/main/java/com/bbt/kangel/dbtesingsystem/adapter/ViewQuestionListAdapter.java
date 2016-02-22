@@ -151,4 +151,8 @@ public class ViewQuestionListAdapter extends RecyclerView.Adapter<ViewQuestionLi
             }
         }
     }
+
+    public void updateCursor(Cursor cursor) {
+        this.cursor = cursor;
+    }
 }

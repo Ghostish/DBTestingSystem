@@ -55,7 +55,7 @@ public class DeanManageActivity extends AppCompatActivity implements View.OnClic
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
 
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(DeanManageActivity.this);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(rv);
 
@@ -90,9 +90,22 @@ public class DeanManageActivity extends AppCompatActivity implements View.OnClic
 
 
     @Override
-    public void onItemSwiped(Bundle args) {
-        final int position = args.getInt("position");
+    public void onItemSwiped(int position) {
+       /* final int position = args.getInt("position");
         String id = args.getString("id");
+        deleteList.add(deleteList.size(), id);
+        String inClause = deleteList.toString();
+        Log.i("inClause", inClause);
+        inClause = inClause.replace('[', '(');
+        inClause = inClause.replace(']', ')');
+        cursor.close();
+        cursor = TestDataBaseUtil.getPeopleList(db, inClause);
+        adapter.updateCursor(cursor);
+        adapter.notifyItemRemoved(position);
+        paramOnClickListener.setPosition(position);
+        Snackbar.make(coordinatorLayout, "已删除", Snackbar.LENGTH_LONG).setAction("撤销", paramOnClickListener).show();*/
+        cursor.moveToPosition(position);
+        String id = cursor.getString(cursor.getColumnIndex("ID"));
         deleteList.add(deleteList.size(), id);
         String inClause = deleteList.toString();
         Log.i("inClause", inClause);

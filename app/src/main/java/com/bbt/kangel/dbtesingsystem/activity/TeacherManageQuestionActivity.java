@@ -50,6 +50,8 @@ public class TeacherManageQuestionActivity extends AppCompatActivity implements 
         gapText.setText(String.format(gapString, cursor.getInt(cursor.getColumnIndex("COUNT"))));
         cursor.moveToNext();
         essayText.setText(String.format(essayString, cursor.getInt(cursor.getColumnIndex("COUNT"))));
+
+        cursor.close();
     }
 
     @Override
@@ -95,4 +97,28 @@ public class TeacherManageQuestionActivity extends AppCompatActivity implements 
             }
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            cursor = TestDataBaseUtil.getQuestionCount(db);
+            switch (requestCode) {
+                case GlobalKeeper.TYPE_CHOICE:
+                    cursor.moveToPosition(0);
+                    choiceText.setText(String.format(choiceString,cursor.getInt(cursor.getColumnIndex("COUNT"))));
+                    break;
+                case GlobalKeeper.TYPE_GAP:
+                    cursor.moveToPosition(1);
+                    gapText.setText(String.format(gapString, cursor.getInt(cursor.getColumnIndex("COUNT"))));
+                    break;
+                case GlobalKeeper.TYPE_ESSAY:
+                    cursor.moveToPosition(2);
+                    essayText.setText(String.format(essayString, cursor.getInt(cursor.getColumnIndex("COUNT"))));
+                    break;
+            }
+            cursor.close();
+        }
+    }
+
 }
