@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.adapter.TeacherViewGradeAdapter;
@@ -29,6 +31,13 @@ public class TeacherChooseUnmarkedActivity extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_view_unmarked_paper);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
@@ -47,6 +56,7 @@ public class TeacherChooseUnmarkedActivity extends AppCompatActivity implements 
 
     @Override
     protected void onRestart() {
+        // TODO: 2016/2/22 use onActivityResult instead of onRestart
         super.onRestart();
         c.close();
         c = TestDataBaseUtil.getPaperUnmarked(db, PID);
@@ -66,7 +76,7 @@ public class TeacherChooseUnmarkedActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public void onRecyclerViewItemSelect(Bundle args) {
+    public void onRecyclerViewItemSelect(Bundle args,String tag) {
         Intent intent = new Intent(TeacherChooseUnmarkedActivity.this, TeacherMarkActivity.class);
         intent.putExtras(args);
         startActivity(intent);

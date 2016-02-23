@@ -8,8 +8,6 @@ import android.support.v7.widget.AppCompatButton;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -31,7 +29,7 @@ public class TeacherAddNewTextQuestionActivity extends AppCompatActivity impleme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_add_content);
+        setContentView(R.layout.activity_teacher_add_text_question);
         Bundle args = getIntent().getExtras();
         try {
             viewType = args.getInt("TYPE");
@@ -72,24 +70,6 @@ public class TeacherAddNewTextQuestionActivity extends AppCompatActivity impleme
                 finish();
             }
         }
-    }
-
-    private void commitNewQuestionToDB() {
-        // TODO: 2016/2/21 use thread to do the following task
-        DataBaseHelper helper = new DataBaseHelper(TeacherAddNewTextQuestionActivity.this, GlobalKeeper.DB_NAME, 1);
-        SQLiteDatabase db = helper.getWritableDatabase();
-        String tableName = null;
-        if (viewType == GlobalKeeper.TYPE_GAP) {
-            tableName = "gapQuestion";
-        }
-        if (viewType == GlobalKeeper.TYPE_ESSAY) {
-            tableName = "essayQuestion";
-        }
-        ContentValues value = new ContentValues();
-        value.put("CONTENT", contentEdit.getText().toString());
-        value.put("ANSWER", answerEdit.getText().toString());
-        db.insert(tableName, null, value);
-        db.close();
     }
 
     @Override
@@ -140,5 +120,23 @@ public class TeacherAddNewTextQuestionActivity extends AppCompatActivity impleme
         } else {
             actionButtonRight.setEnabled(true);
         }
+    }
+
+    private void commitNewQuestionToDB() {
+        // TODO: 2016/2/21 use thread to do the following task
+        DataBaseHelper helper = new DataBaseHelper(TeacherAddNewTextQuestionActivity.this, GlobalKeeper.DB_NAME, 1);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String tableName = null;
+        if (viewType == GlobalKeeper.TYPE_GAP) {
+            tableName = "gapQuestion";
+        }
+        if (viewType == GlobalKeeper.TYPE_ESSAY) {
+            tableName = "essayQuestion";
+        }
+        ContentValues value = new ContentValues();
+        value.put("CONTENT", contentEdit.getText().toString());
+        value.put("ANSWER", answerEdit.getText().toString());
+        db.insert(tableName, null, value);
+        db.close();
     }
 }

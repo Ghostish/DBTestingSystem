@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_answer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/title_add_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/title_add_choices"
+        android:textSize="32sp"
+        android:textStyle="italic" />
+
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/radio_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:labelFor="@+id/edit_choice_a"
+            android:text="@string/label_choice_a"
+            android:textColor="@color/RedColorPrimaryDark"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edit_choice_a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:inputType="textMultiLine" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/radio_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/edit_choice_b"
+            android:text="@string/label_choice_b"
+            android:textColor="@color/RedColorPrimaryDark"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edit_choice_b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:inputType="textMultiLine" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/radio_c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/edit_choice_c"
+            android:text="@string/label_choice_c"
+            android:textColor="@color/RedColorPrimaryDark"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edit_choice_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:inputType="textMultiLine" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/radio_d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/edit_choice_d"
+            android:text="@string/label_choice_d"
+            android:textColor="@color/RedColorPrimaryDark"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edit_choice_d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:inputType="textMultiLine" />
+    </RadioGroup>
+
+</LinearLayout>

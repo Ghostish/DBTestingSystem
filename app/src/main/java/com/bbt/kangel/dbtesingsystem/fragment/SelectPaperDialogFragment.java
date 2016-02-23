@@ -44,7 +44,7 @@ public class SelectPaperDialogFragment extends DialogFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         helper = new DataBaseHelper(getActivity(), GlobalKeeper.DB_NAME, 1);
         db = helper.getReadableDatabase();
-        c = TestDataBaseUtil.getPaperList(db);
+        c = TestDataBaseUtil.getPaperList(db,null);
         ViewPaperListAdapter adapter = new ViewPaperListAdapter(getActivity(), c);
         recyclerView.setAdapter(adapter);
         Log.d("cycle", "onCreateView");

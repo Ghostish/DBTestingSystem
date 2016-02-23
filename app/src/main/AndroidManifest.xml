@@ -32,6 +32,8 @@
         <activity android:name=".activity.TeacherViewPaperDetailActivity"/>
         <activity android:name=".activity.TeacherViewQuestionDetailActivity"/>
         <activity android:name=".activity.TeacherAddNewTextQuestionActivity"/>
+        <activity android:name=".activity.TeacherAddChoiceQuestionActivity" />
+        <activity android:name=".activity.TeacherAddPaperActivity" />
     </application>
 
 </manifest>

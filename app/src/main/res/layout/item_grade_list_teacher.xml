@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:minHeight="48dp"
     android:padding="8dp"
-    android:background="?android:selectableItemBackground"
+    android:foreground="?android:selectableItemBackground"
     app:cardBackgroundColor="@color/RedColorPrimary"
     app:cardCornerRadius="4dp"
     app:cardUseCompatPadding="true">

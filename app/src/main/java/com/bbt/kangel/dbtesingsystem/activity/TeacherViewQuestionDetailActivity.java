@@ -137,14 +137,19 @@ public class TeacherViewQuestionDetailActivity extends AppCompatActivity impleme
             case R.id.fab: {
                 if (viewType == GlobalKeeper.TYPE_CHOICE) {
                     // TODO: 2016/2/21 start add new choice question activity
+                    Intent intent = new Intent(TeacherViewQuestionDetailActivity.this, TeacherAddChoiceQuestionActivity.class);
+                    Bundle args = new Bundle();
+                    args.putInt("TYPE", viewType);
+                    intent.putExtras(args);
+                    startActivityForResult(intent, viewType);
                 } else {
                     Intent intent = new Intent(TeacherViewQuestionDetailActivity.this, TeacherAddNewTextQuestionActivity.class);
                     Bundle args = new Bundle();
                     args.putInt("TYPE", viewType);
                     intent.putExtras(args);
                     startActivityForResult(intent, viewType);
-                    break;
                 }
+                break;
             }
             default: {
                 if (hasQuestionAdded || !deleteList.isEmpty()) {

@@ -82,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/lightGrey">
+        android:background="@color/navigate_grey">
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/action_button_left"

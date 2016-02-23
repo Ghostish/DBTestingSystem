@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -27,7 +28,7 @@ import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
     private EditText editUsername, editPassword;
     private Spinner spinner;
-    private TextView loginTextButton;
+    private CardView loginCardButton;
     private SQLiteDatabase db;
     private DataBaseHelper helper;
 
@@ -58,8 +59,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editPassword = (EditText) findViewById(R.id.edit_password);
         editUsername.addTextChangedListener(this);
         editPassword.addTextChangedListener(this);
-        loginTextButton = (TextView) findViewById(R.id.login_button_text);
-        loginTextButton.setClickable(false);
+        loginCardButton = (CardView) findViewById(R.id.login_button_card);
+        loginCardButton.setClickable(false);
         String[] roleArray = getResources().getStringArray(R.array.role_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, roleArray);
         spinner.setAdapter(adapter);
@@ -70,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.login_button_text:
+            case R.id.login_button_card:
                 // TODO: 2015/12/5 do something
                 String[] selectionArgs = new String[]{editUsername.getText().toString(), editPassword.getText().toString()};
                 db = helper.getReadableDatabase();
@@ -152,11 +153,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String username = editUsername.getText().toString();
         String password = editPassword.getText().toString();
         if (!username.isEmpty() && !password.isEmpty()) {
-            loginTextButton.setClickable(true);
-            loginTextButton.setAlpha(1.0f);
+            loginCardButton.setClickable(true);
+            loginCardButton.setAlpha(1.0f);
         } else {
-            loginTextButton.setClickable(false);
-            loginTextButton.setAlpha(0.54f);
+            loginCardButton.setClickable(false);
+            loginCardButton.setAlpha(0.54f);
         }
     }
 }

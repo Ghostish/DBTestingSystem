@@ -20,8 +20,9 @@ public class TestDataBaseUtil {
                 " ) where ID not in " + notInClause, null);
     }
 
-    public static Cursor getPaperList(SQLiteDatabase db) {
-        return db.rawQuery("select * from papers order by PID", null);
+    public static Cursor getPaperList(SQLiteDatabase db, String notInClause) {
+        notInClause = notInClause != null ? notInClause : "('')";
+        return db.rawQuery("select * from papers where PID not in " + notInClause + " order by PID", null);
     }
 
     public static Cursor getPaperUnmarked(SQLiteDatabase db, String PID) {
@@ -62,15 +63,15 @@ public class TestDataBaseUtil {
         return db.rawQuery("select grades.*,SNAME from grades,students where students.SNO = grades.SNO  and PID = " + PID + " and GRADE between " + fromGrade + " and " + toGrade + " order by " + orderBy, null);
     }
 
-    public static Cursor getQuestionByTYPE(SQLiteDatabase db, int type,String notInClause) {
+    public static Cursor getQuestionByTYPE(SQLiteDatabase db, int type, String notInClause) {
         notInClause = notInClause != null ? notInClause : "('')";
         switch (type) {
             case GlobalKeeper.TYPE_CHOICE:
-                return db.rawQuery("select *, 0 TYPE from choiceQuestion where QID not in "+ notInClause + " order by QID", null);
+                return db.rawQuery("select *, 0 TYPE from choiceQuestion where QID not in " + notInClause + " order by QID", null);
             case GlobalKeeper.TYPE_GAP:
-                return db.rawQuery("select *, 1 TYPE from gapQuestion where QID not in "+ notInClause + "order by QID", null);
+                return db.rawQuery("select *, 1 TYPE from gapQuestion where QID not in " + notInClause + "order by QID", null);
             case GlobalKeeper.TYPE_ESSAY:
-                return db.rawQuery("select *, 2 TYPE from essayQuestion where QID not in "+ notInClause + "order by QID", null);
+                return db.rawQuery("select *, 2 TYPE from essayQuestion where QID not in " + notInClause + "order by QID", null);
         }
         return null;
     }

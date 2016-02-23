@@ -2,6 +2,7 @@ package com.bbt.kangel.dbtesingsystem.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
+import com.bbt.kangel.dbtesingsystem.util.RecyclerViewActivity;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,7 @@ public class ViewQuestionListAdapter extends RecyclerView.Adapter<ViewQuestionLi
     private boolean itemClickable;
     private boolean showScore;
     private String contentFormatString;
+    private String tag;
 
     private int selectedBackGround, unselectedBackGround;
     private boolean[] selectedArray;
@@ -44,6 +47,10 @@ public class ViewQuestionListAdapter extends RecyclerView.Adapter<ViewQuestionLi
             unselectedBackGround = ContextCompat.getColor(context, R.color.transparent);
             selectedArray = new boolean[cursor.getCount()];
         }
+    }
+    public ViewQuestionListAdapter(Context context, Cursor cursor, boolean itemClickable, boolean showScore,String tag) {
+        this(context, cursor, itemClickable, showScore);
+        this.tag = tag;
     }
 
     @Override
@@ -111,6 +118,12 @@ public class ViewQuestionListAdapter extends RecyclerView.Adapter<ViewQuestionLi
                     selectedArray[holder.getAdapterPosition()] = !selectedArray[holder.getAdapterPosition()];
                     setBackGround(selectedArray[holder.getAdapterPosition()], holder.itemView);
                     // TODO: 2016/2/20 call activity method
+                    if (context instanceof RecyclerViewActivity) {
+                        Bundle args = new Bundle();
+                        args.putInt("position", holder.getAdapterPosition());
+                        args.putBoolean("isPicked", selectedArray[holder.getAdapterPosition()]);
+                        ((RecyclerViewActivity) context).onRecyclerViewItemSelect(args,tag);
+                    }
                 }
             });
         }

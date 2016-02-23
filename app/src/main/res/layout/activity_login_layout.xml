@@ -3,9 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BlueColorPrimaryLight"
+    android:background="@drawable/login_background"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_box"
+        android:src="@mipmap/banner"
+        android:contentDescription="@null" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/text_box"
@@ -62,20 +68,21 @@
         android:layout_below="@+id/text_box"
         android:layout_marginLeft="48dp"
         android:layout_marginRight="48dp"
+        android:foreground="?selectableItemBackground"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardElevation="@dimen/card_elevation"
+        android:alpha="0.54"
         android:layout_marginTop="24dp"
-        app:cardBackgroundColor="@color/BlueColorPrimary"
         app:cardCornerRadius="4dp"
+        android:onClick="onClick"
         app:cardUseCompatPadding="true">
 
         <TextView
             android:id="@+id/login_button_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.54"
-            android:background="?android:selectableItemBackground"
             android:clickable="false"
             android:gravity="center"
-            android:onClick="onClick"
             android:text="@string/tap_to_login"
             android:textColor="?android:textColorPrimaryInverse"
             android:textSize="16sp" />

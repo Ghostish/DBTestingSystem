@@ -45,15 +45,26 @@ public class TeacherViewPaperDetailActivity extends AppCompatActivity implements
         DataBaseHelper helper = new DataBaseHelper(TeacherViewPaperDetailActivity.this, GlobalKeeper.DB_NAME, 1);
         db = helper.getReadableDatabase();
         cursor = TestDataBaseUtil.getQuestionsByPID(db, PID);
-        ViewQuestionListAdapter adapter = new ViewQuestionListAdapter(TeacherViewPaperDetailActivity.this, cursor,false,true);
+        ViewQuestionListAdapter adapter = new ViewQuestionListAdapter(TeacherViewPaperDetailActivity.this, cursor, false, true);
         rv.setAdapter(adapter);
 
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (db != null && db.isOpen()) {
+            db.close();
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            default:{
+            default: {
                 finish();
             }
         }

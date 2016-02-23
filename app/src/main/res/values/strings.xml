@@ -82,4 +82,17 @@
     <string name="desc_add_question">通过简单几步来添加一道新试题</string>
     <string name="title_add_question_answer">添加参考答案</string>
     <string name="finish">完成</string>
+    <string name="title_add_choices">添加选项</string>
+    <string name="label_choice_a">选项A:</string>
+    <string name="label_choice_b">选项B:</string>
+    <string name="label_choice_c">选项C:</string>
+    <string name="label_choice_d">选项D:</string>
+    <string name="title_add_paper_scheme">添加方案</string>
+    <string name="desc_add_paper">通过简单几步来添加一份试卷</string>
+    <string name="hint_question_count">题量</string>
+    <string name="hint_score">分值</string>
+    <string name="label_total_score">当前总分：</string>
+    <string name="title_pick_choices">添加选择题（%1$d/%2$d）</string>
+    <string name="title_pick_gaps">添加填空题（%1$d/%2$d）</string>
+    <string name="title_pick_essays">添加问答题（%1$d/%2$d）</string>
 </resources>

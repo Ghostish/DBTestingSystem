@@ -51,7 +51,7 @@ public class ViewPaperListAdapter extends RecyclerView.Adapter<ViewPaperListAdap
                         // TODO: 2016/2/21 use a tag variable to save the selectPaper tag
                         ((DialogActivity) context).onDialogItemSelect("selectPaper", bundle);
                     }else if (context instanceof RecyclerViewActivity) {
-                        ((RecyclerViewActivity) context).onRecyclerViewItemSelect(bundle);
+                        ((RecyclerViewActivity) context).onRecyclerViewItemSelect(bundle,"paperList");
                     }
                 }
             });
@@ -61,6 +61,10 @@ public class ViewPaperListAdapter extends RecyclerView.Adapter<ViewPaperListAdap
     @Override
     public int getItemCount() {
         return cursor.getCount();
+    }
+
+    public void updateCursor(Cursor c) {
+        this.cursor = c;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
