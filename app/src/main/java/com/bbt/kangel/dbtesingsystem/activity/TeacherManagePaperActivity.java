@@ -40,7 +40,7 @@ public class TeacherManagePaperActivity extends AppCompatActivity implements Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_paper_question_management);
+        setContentView(R.layout.activity_view_list_with_fab);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout)
         ;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -88,7 +88,11 @@ public class TeacherManagePaperActivity extends AppCompatActivity implements Vie
     protected void onDestroy() {
         super.onDestroy();
         // TODO: 2016/2/23 use thread to do the following task
-        db.delete("Papers", "PID in" + getNotInClause(), null);
+        try {
+            db.delete("Papers", "PID in" + getNotInClause(), null);
+        } catch (Exception e) {
+            Log.e("sqlite", e.toString() + " delete failed due to foreign key constraint");
+        }
         if (db != null && db.isOpen()) {
             db.close();
         }
@@ -98,7 +102,7 @@ public class TeacherManagePaperActivity extends AppCompatActivity implements Vie
     }
 
     @Override
-    public void onRecyclerViewItemSelect(Bundle args, String tag) {
+    public void onRecyclerViewItemSelect(Bundle args, String tag,int position) {
         Intent intent = new Intent(TeacherManagePaperActivity.this, TeacherViewPaperDetailActivity.class);
         intent.putExtras(args);
         startActivity(intent);

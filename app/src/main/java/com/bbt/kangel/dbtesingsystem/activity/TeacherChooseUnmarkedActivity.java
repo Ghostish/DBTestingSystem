@@ -76,7 +76,7 @@ public class TeacherChooseUnmarkedActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public void onRecyclerViewItemSelect(Bundle args,String tag) {
+    public void onRecyclerViewItemSelect(Bundle args,String tag,int position) {
         Intent intent = new Intent(TeacherChooseUnmarkedActivity.this, TeacherMarkActivity.class);
         intent.putExtras(args);
         startActivity(intent);

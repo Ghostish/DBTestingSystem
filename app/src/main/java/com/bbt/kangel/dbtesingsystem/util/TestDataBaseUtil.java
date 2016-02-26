@@ -11,6 +11,17 @@ import java.util.Collection;
 public class TestDataBaseUtil {
     static final int STUDENT = 0, TEACHER = 1;
 
+    public static Cursor getSinglePeopleByID(SQLiteDatabase db, int type, String id) {
+        switch (type) {
+            case GlobalKeeper.TYPE_STUDENT:
+                return db.rawQuery("select * from students where sno = " + id, null);
+            case GlobalKeeper.TYPE_TEACHER:
+                return db.rawQuery("select * from teachers where tno = " + id, null);
+            case GlobalKeeper.TYPE_DEAN:
+                return db.rawQuery("select * from deans where tno = " + id, null);
+        }
+        return null;
+    }
     public static Cursor getPeopleList(SQLiteDatabase db, String notInClause) {
         notInClause = notInClause != null ? notInClause : "('')";
         return db.rawQuery("select NAME, ID, TYPE from(\n" +
@@ -56,7 +67,7 @@ public class TestDataBaseUtil {
     }
 
     public static Cursor getGradeDetail(SQLiteDatabase db, String SNO) {
-        return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore  left join gapScore on choiceScore.PID = gapScore.PID left join essayScore on essayScore.PID = gapScore.PID where choiceScore.SNO = ? and gapScore.SNO = ? and essayScore.SNO = ?", new String[]{SNO, SNO, SNO});
+        return db.rawQuery("select choiceScore.PID PID,choiceScore.SUMSCORE CHOICEGRADE,gapScore.SUMSCORE GAPGRADE,essayScore.SUMSCORE ESSAYGRADE from choiceScore  left join gapScore on choiceScore.PID = gapScore.PID and choiceScore.SNO = gapScore.SNO left join essayScore on essayScore.PID = gapScore.PID and gapScore.SNO = essayScore.SNO where choiceScore.SNO = ? ", new String[]{SNO});
     }
 
     public static Cursor getGradesList(SQLiteDatabase db, String PID, String orderBy, String fromGrade, String toGrade) {

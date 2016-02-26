@@ -1,5 +1,6 @@
 package com.bbt.kangel.dbtesingsystem.activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,9 +16,12 @@ import android.view.View;
 
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.adapter.PeopleListAdapter;
+import com.bbt.kangel.dbtesingsystem.fragment.ChooseItemDialogFragment;
 import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
+import com.bbt.kangel.dbtesingsystem.util.DialogActivity;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.ItemTouchHelperActivity;
+import com.bbt.kangel.dbtesingsystem.util.RecyclerViewActivity;
 import com.bbt.kangel.dbtesingsystem.util.SimpleItemTouchHelperCallback;
 import com.bbt.kangel.dbtesingsystem.util.TestDataBaseUtil;
 
@@ -26,18 +30,20 @@ import java.util.ArrayList;
 /**
  * Created by Kangel on 2016/2/18.
  */
-public class DeanManageActivity extends AppCompatActivity implements View.OnClickListener, ItemTouchHelperActivity {
+public class DeanManageActivity extends AppCompatActivity implements View.OnClickListener, ItemTouchHelperActivity, RecyclerViewActivity, DialogActivity {
     private SQLiteDatabase db;
     private Cursor cursor;
     private PeopleListAdapter adapter;
     private CoordinatorLayout coordinatorLayout;
     private ParamOnClickListener paramOnClickListener;
     private ArrayList<String> deleteList = new ArrayList<>();
+    private ChooseItemDialogFragment chooseItemDialogFragment;
+    private int changedPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_list);
+        setContentView(R.layout.activity_view_list_with_fab);
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         paramOnClickListener = new ParamOnClickListener();
@@ -69,8 +75,12 @@ public class DeanManageActivity extends AppCompatActivity implements View.OnClic
         Log.i("inClause", inClause);
         inClause = inClause.replace('[', '(');
         inClause = inClause.replace(']', ')');
-        db.delete("students", "SNO in " + inClause, null);
-        db.delete("teachers", "TNO in " + inClause, null);
+        try {
+            db.delete("students", "SNO in " + inClause, null);
+            db.delete("teachers", "TNO in " + inClause, null);
+        } catch (Exception e) {
+            Log.e("sqlite", e.toString() + " delete failed");
+        }
         if (db != null && db.isOpen()) {
             db.close();
         }
@@ -80,14 +90,37 @@ public class DeanManageActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case DeanAddOrEditAccountActivity.MODE_ADD: {
+                    updateAdapter();
+                    adapter.notifyItemInserted(adapter.getItemCount() - 1);
+                }
+                case DeanAddOrEditAccountActivity.MODE_EDIT: {
+                    updateAdapter();
+                    adapter.notifyItemChanged(changedPosition);
+                }
+            }
+        }
+    }
+
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.fab: {
+                if (chooseItemDialogFragment == null) {
+                    chooseItemDialogFragment = ChooseItemDialogFragment.newInstance(R.array.add_new_account);
+                }
+                chooseItemDialogFragment.show(getSupportFragmentManager(), "chooseWhich");
+                break;
+            }
             default: {
                 finish();
             }
         }
     }
-
 
     @Override
     public void onItemSwiped(int position) {
@@ -106,17 +139,52 @@ public class DeanManageActivity extends AppCompatActivity implements View.OnClic
         Snackbar.make(coordinatorLayout, "已删除", Snackbar.LENGTH_LONG).setAction("撤销", paramOnClickListener).show();*/
         cursor.moveToPosition(position);
         String id = cursor.getString(cursor.getColumnIndex("ID"));
-        deleteList.add(deleteList.size(), id);
-        String inClause = deleteList.toString();
-        Log.i("inClause", inClause);
-        inClause = inClause.replace('[', '(');
-        inClause = inClause.replace(']', ')');
-        cursor.close();
-        cursor = TestDataBaseUtil.getPeopleList(db, inClause);
-        adapter.updateCursor(cursor);
+        deleteList.add(deleteList.size(), "'" + id + "'");
+        updateAdapter();
         adapter.notifyItemRemoved(position);
         paramOnClickListener.setPosition(position);
         Snackbar.make(coordinatorLayout, "已删除", Snackbar.LENGTH_LONG).setAction("撤销", paramOnClickListener).show();
+    }
+
+    @Override
+    public void onRecyclerViewItemSelect(Bundle args, String tag, int position) {
+        changedPosition = position;
+        Intent intent = new Intent(DeanManageActivity.this, DeanViewPeopleDetailActivity.class);
+        intent.putExtras(args);
+        startActivityForResult(intent, DeanAddOrEditAccountActivity.MODE_EDIT);
+
+    }
+
+    @Override
+    public void dismissDialog() {
+
+    }
+
+    @Override
+    public void doAtPositiveButton(String tag) {
+
+    }
+
+    @Override
+    public void onDialogItemSelect(String tag, Bundle args) {
+        if ("chooseWhich".equals(tag)) {
+            Intent intent = new Intent(DeanManageActivity.this, DeanAddOrEditAccountActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("MODE", DeanAddOrEditAccountActivity.MODE_ADD);
+            switch (args.getInt("which")) {
+                case 0: {
+                    bundle.putInt("TYPE", GlobalKeeper.TYPE_STUDENT);
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, DeanAddOrEditAccountActivity.MODE_ADD);
+                    break;
+                }
+                case 1:
+                    bundle.putInt("TYPE", GlobalKeeper.TYPE_TEACHER);
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, DeanAddOrEditAccountActivity.MODE_ADD);
+                    break;
+            }
+        }
     }
 
     public class ParamOnClickListener implements View.OnClickListener {
@@ -129,14 +197,21 @@ public class DeanManageActivity extends AppCompatActivity implements View.OnClic
         @Override
         public void onClick(View v) {
             deleteList.remove(deleteList.size() - 1);
-            String inClause = deleteList.toString();
-            Log.i("inClause", inClause);
-            inClause = inClause.replace('[', '(');
-            inClause = inClause.replace(']', ')');
-            cursor.close();
-            cursor = TestDataBaseUtil.getPeopleList(db, inClause);
-            adapter.updateCursor(cursor);
+            updateAdapter();
             adapter.notifyItemInserted(position);
         }
+    }
+
+    private void updateAdapter() {
+        cursor.close();
+        cursor = TestDataBaseUtil.getPeopleList(db, getNotInClause());
+        adapter.updateCursor(cursor);
+    }
+
+    private String getNotInClause() {
+        String inClause = deleteList.toString();
+        Log.i("inClause", inClause);
+        inClause = inClause.replace('[', '(');
+        return inClause.replace(']', ')');
     }
 }

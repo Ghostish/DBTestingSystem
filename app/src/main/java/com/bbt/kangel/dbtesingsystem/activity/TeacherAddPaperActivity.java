@@ -129,9 +129,8 @@ public class TeacherAddPaperActivity extends AppCompatActivity implements View.O
     }
 
     @Override
-    public void onRecyclerViewItemSelect(Bundle args, String tag) {
+    public void onRecyclerViewItemSelect(Bundle args, String tag,int position) {
         boolean isPicked = args.getBoolean("isPicked");
-        int position = args.getInt("position");
         switch (tag) {
             case "choices":
                 if (isPicked) {

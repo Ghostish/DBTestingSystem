@@ -9,4 +9,8 @@
         <item>试卷管理</item>
         <item>题库管理</item>
     </string-array>
+    <string-array name="add_new_account">
+        <item>新增学生</item>
+        <item>新增老师</item>
+    </string-array>
 </resources>

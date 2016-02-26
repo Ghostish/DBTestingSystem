@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.LoginActivity" android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -34,6 +34,8 @@
         <activity android:name=".activity.TeacherAddNewTextQuestionActivity"/>
         <activity android:name=".activity.TeacherAddChoiceQuestionActivity" />
         <activity android:name=".activity.TeacherAddPaperActivity" />
+        <activity android:name=".activity.DeanViewPeopleDetailActivity" />
+        <activity android:name=".activity.DeanAddOrEditAccountActivity" />
     </application>
 
 </manifest>

@@ -291,9 +291,13 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
       /*  progressDialog = new ProgressDialog(TestActivity.this);
         progressDialog.setCancelable(false);*/
         mShowDialog(PROGRESS, getResources().getString(R.string.msg_saving));
-        db.delete("choiceAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
-        db.delete("gapAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
-        db.delete("essayAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
+        try {
+            db.delete("choiceAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
+            db.delete("gapAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
+            db.delete("essayAnswers", " SNO = ? and PID = ?", new String[]{getSNO(), getPID() + ""});
+        } catch (Exception e) {
+            Log.e("sqlite", e.toString() + " delete failed");
+        }
         new Thread(new Runnable() {
             @Override
             public void run() {

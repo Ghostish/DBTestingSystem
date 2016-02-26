@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.adapter.ViewQuestionListAdapter;
@@ -46,7 +47,7 @@ public class TeacherViewQuestionDetailActivity extends AppCompatActivity impleme
         } catch (Exception e) {
             throw new NullPointerException(this.toString() + "must call this activity with TYPE set in bundle");
         }
-        setContentView(R.layout.activity_teacher_paper_question_management);
+        setContentView(R.layout.activity_view_list_with_fab);
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         paramOnClickListener = new ParamOnClickListener();
@@ -118,7 +119,12 @@ public class TeacherViewQuestionDetailActivity extends AppCompatActivity impleme
                     tableName = "essayQuestion";
                     break;
             }
-            db.delete(tableName, "QID in" + getNotInClause(), null);
+            try {
+                db.delete(tableName, "QID in" + getNotInClause(), null);
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), R.string.delete_failed_due_to_foreign_key_constraint, Toast.LENGTH_LONG).show();
+                Log.e("sqlite", e.toString() + " delete failed due to foreign key constraint");
+            }
         }
         super.finish();
     }

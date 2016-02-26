@@ -95,4 +95,18 @@
     <string name="title_pick_choices">添加选择题（%1$d/%2$d）</string>
     <string name="title_pick_gaps">添加填空题（%1$d/%2$d）</string>
     <string name="title_pick_essays">添加问答题（%1$d/%2$d）</string>
+    <string name="title_view_people_detail">查看详情</string>
+    <string name="label_name_without_colon">姓名</string>
+    <string name="label_sno_without_colon">学号</string>
+    <string name="label_tno_without_colon">职工号</string>
+    <string name="label_major">专业</string>
+    <string name="title_add_new_account">新增人员</string>
+    <string name="delete_failed_due_to_foreign_key_constraint">删除失败，请勿删除已被组卷的题目</string>
+    <string name="label_sno_or_tno">学号/职工号</string>
+
+    <string name="error_can_not_be_empty" >该项不能为空</string>
+    <string name="add_account_successfully">新增成功</string>
+    <string name="add_account_failed">添加失败，请检查数据是否合法</string>
+    <string name="edit_account_successfully">修改成功</string>
+    <string name="edit_account_failed">修改失败，请检查条目再重试</string>
 </resources>

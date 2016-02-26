@@ -3,15 +3,18 @@
     <color name="BlueColorPrimary">#617ca3</color>
     <color name="BlueColorPrimaryDark">#364a68</color>
     <color name="BlueColorPrimaryLight">#8fa6c6</color>
+    <color name="RedColorPrimary">#e08886</color>
+    <color name="RedColorPrimaryDark">#d34d4a</color>
+    <color name="RedColorPrimaryLight">#f0cac9</color>
+    <color name="GreenColorPrimary">#379d7c</color>
+    <color name="GreenColorPrimaryDark">#2e6d56</color>
+    <color name="GreenColorPrimaryLight">#a6f0d6</color>
     <color name="colorAccent">#d34d4a</color>
     <color name="login_page_background">#46ff9c</color>
     <color name="lighter_background">#f9f9f9</color>
     <color name="login_button">#f9f9f9</color>
     <color name="transparent">#00000000</color>
     <color name="divider_background">#1e000000</color>
-    <color name="RedColorPrimary">#e08886</color>
-    <color name="RedColorPrimaryDark">#d34d4a</color>
-    <color name="RedColorPrimaryLight">#f0cac9</color>
     <color name="lightGrey">#d3d3d3</color>
     <color name="navigate_grey">#34a9a89c</color>
 </resources>

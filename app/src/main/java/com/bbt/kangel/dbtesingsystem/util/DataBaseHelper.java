@@ -17,9 +17,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             "create table gapQuestion (QID integer primary key autoincrement, CONTENT varchar(100) not null unique, ANSWER varchar(50) not null);\n",
             "create table essayQuestion (QID integer primary key autoincrement, CONTENT varchar(300) not null unique, ANSWER varchar (300) not null);\n",
             "create table papers(PID integer primary key autoincrement,CREATETIME varchar(10));\n",
-            "create table choiceInPapers(PID integer references papers(PID),QID integer references choiceQuestion(QID),SCORE integer not null,primary key(PID,QID));\n",
-            "create table gapInPapers(PID integer references papers(PID),QID integer references gapQuestion(QID),SCORE integer not null,primary key(PID,QID));\n",
-            "create table essayInPapers(PID integer references papers(PID),QID integer references essayQuestion(QID),SCORE integer not null,primary key(PID,QID));\n",
+            "create table choiceInPapers(PID integer references papers(PID) ON DELETE CASCADE,QID integer references choiceQuestion(QID),SCORE integer not null,primary key(PID,QID));\n",
+            "create table gapInPapers(PID integer references papers(PID) ON DELETE CASCADE,QID integer references gapQuestion(QID),SCORE integer not null,primary key(PID,QID));\n",
+            "create table essayInPapers(PID integer references papers(PID) ON DELETE CASCADE,QID integer references essayQuestion(QID),SCORE integer not null,primary key(PID,QID));\n",
             "create table choiceAnswers(SNO varchar(12) references students(SNO), PID integer references papers(PID),QID integer references choiceQuestion(QID) , ANSWER char(1) check(ANSWER in ('A','B','C','D','#')) ,SCORE integer, primary key(SNO,PID,QID));\n",
             "create table gapAnswers(SNO varchar(12) references students(SNO), PID integer references papers(PID),QID integer references gapQuestion(QID) , ANSWER varchar(50),SCORE integer default 0, ISMARKED integer check (ISMARKED in (0,1)) default 0,primary key(SNO,PID,QID));\n",
             "create table essayAnswers(SNO varchar(12) references students(SNO), PID integer references papers(PID),QID integer references essayQuestion(QID) , ANSWER varchar(300),SCORE integer default 0,ISMARKED integer check (ISMARKED in (0,1)) default 0,primary key(SNO,PID,QID));\n",
@@ -125,6 +125,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             "(2,18,3),\n" +
             "(2,19,3),\n" +
             "(2,20,3);";
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if (!db.isReadOnly()) {
+            // Enable foreign key constraints
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
+    }
+
     static final String INSERT_GAP_IN_PAPER = "insert into gapInPapers values\n" +
             "(1,1,4),  \n" +
             "(1,2,4),\n" +

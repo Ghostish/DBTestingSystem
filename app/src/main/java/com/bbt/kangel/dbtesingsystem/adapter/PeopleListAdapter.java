@@ -14,6 +14,7 @@ import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.ItemTouchHelperActivity;
 import com.bbt.kangel.dbtesingsystem.util.ItemTouchHelperAdapter;
+import com.bbt.kangel.dbtesingsystem.util.RecyclerViewActivity;
 
 /**
  * Created by Kangel on 2016/2/18.
@@ -33,12 +34,12 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Vi
         switch (viewType) {
             case GlobalKeeper.TYPE_STUDENT: {
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_student_info, parent, false);
-                v.setTag(viewType);
+                v.setTag("students");
                 return new ViewHolder(v);
             }
             case GlobalKeeper.TYPE_TEACHER: {
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_teacher_info, parent, false);
-                v.setTag(viewType);
+                v.setTag("teachers");
                 return new ViewHolder(v);
             }
             default: {
@@ -53,7 +54,19 @@ public class PeopleListAdapter extends RecyclerView.Adapter<PeopleListAdapter.Vi
         cursor.moveToPosition(position);
         holder.nameText.setText(cursor.getString(cursor.getColumnIndex("NAME")));
         holder.idText.setText(cursor.getString(cursor.getColumnIndex("ID")));
-
+        if (!holder.itemView.hasOnClickListeners()) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (context instanceof RecyclerViewActivity) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("ID", holder.idText.getText().toString());
+                        bundle.putInt("TYPE", getItemViewType(holder.getAdapterPosition()));
+                        ((RecyclerViewActivity) context).onRecyclerViewItemSelect(bundle, ((String) holder.itemView.getTag()),holder.getAdapterPosition());
+                    }
+                }
+            });
+        }
     }
 
     @Override

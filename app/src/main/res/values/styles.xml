@@ -11,10 +11,20 @@
 
     <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/BlueColorPrimary</item>
+        <item name="colorPrimaryDark">@color/transparent</item>
+        <item name="colorAccent">@color/BlueColorPrimary</item>
+        <item name="android:windowBackground">@drawable/cold_start_background</item>
+    </style>
+
+    <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/RedColorPrimary</item>
         <item name="colorPrimaryDark">@color/RedColorPrimaryDark</item>
         <item name="colorAccent">@color/BlueColorPrimary</item>
+        <item name="android:windowBackground">@drawable/cold_start_background</item>
     </style>
+
     <style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <!-- Used for the buttons -->
         <item name="colorAccent">@color/RedColorPrimary</item>

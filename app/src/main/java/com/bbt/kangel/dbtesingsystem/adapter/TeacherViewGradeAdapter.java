@@ -45,7 +45,7 @@ public class TeacherViewGradeAdapter extends RecyclerView.Adapter<TeacherViewGra
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         cursor.moveToPosition(position);
         holder.text_sno.setText(cursor.getString(cursor.getColumnIndex("SNO")));
         holder.text_name.setText(cursor.getString(cursor.getColumnIndex("SNAME")));
@@ -61,7 +61,7 @@ public class TeacherViewGradeAdapter extends RecyclerView.Adapter<TeacherViewGra
                         Bundle args = new Bundle();
                         args.putString("sno", cursor.getString(cursor.getColumnIndex("SNO")));
                         args.putString("pid",cursor.getString(cursor.getColumnIndex("PID")));
-                        ((RecyclerViewActivity) context).onRecyclerViewItemSelect(args,"viewGrade");
+                        ((RecyclerViewActivity) context).onRecyclerViewItemSelect(args,"viewGrade",holder.getAdapterPosition());
                     }
                 }
             });

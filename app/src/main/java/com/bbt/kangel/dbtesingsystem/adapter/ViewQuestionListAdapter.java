@@ -120,9 +120,8 @@ public class ViewQuestionListAdapter extends RecyclerView.Adapter<ViewQuestionLi
                     // TODO: 2016/2/20 call activity method
                     if (context instanceof RecyclerViewActivity) {
                         Bundle args = new Bundle();
-                        args.putInt("position", holder.getAdapterPosition());
                         args.putBoolean("isPicked", selectedArray[holder.getAdapterPosition()]);
-                        ((RecyclerViewActivity) context).onRecyclerViewItemSelect(args,tag);
+                        ((RecyclerViewActivity) context).onRecyclerViewItemSelect(args,tag,holder.getAdapterPosition());
                     }
                 }
             });
