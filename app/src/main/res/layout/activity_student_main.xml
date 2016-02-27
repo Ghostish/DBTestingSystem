@@ -54,6 +54,7 @@
 
         <LinearLayout
             android:id="@+id/button_box"
+            android:layoutAnimation="@anim/layout_button_enter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

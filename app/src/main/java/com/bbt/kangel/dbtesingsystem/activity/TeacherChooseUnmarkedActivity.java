@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.adapter.TeacherViewGradeAdapter;
+import com.bbt.kangel.dbtesingsystem.util.EmptyViewRecyclerView;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.RecyclerViewActivity;
 import com.bbt.kangel.dbtesingsystem.util.TestDataBaseUtil;
@@ -42,7 +43,7 @@ public class TeacherChooseUnmarkedActivity extends AppCompatActivity implements 
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             PID = bundle.getString("PID");
-            RecyclerView rv = (RecyclerView) findViewById(R.id.recycle_view);
+            EmptyViewRecyclerView rv = (EmptyViewRecyclerView) findViewById(R.id.recycle_view);
             rv.setHasFixedSize(true);
             rv.setLayoutManager(new LinearLayoutManager(this));
             DataBaseHelper helper = new DataBaseHelper(this, GlobalKeeper.DB_NAME, 1);
@@ -50,6 +51,7 @@ public class TeacherChooseUnmarkedActivity extends AppCompatActivity implements 
             c = TestDataBaseUtil.getPaperUnmarked(db, PID);
             adapter = new TeacherViewGradeAdapter(this, c);
             rv.setAdapter(adapter);
+            rv.setEmptyView(findViewById(R.id.empty_view));
         }
 
     }

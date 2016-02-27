@@ -78,6 +78,8 @@ public class DeanViewPeopleDetailActivity extends AppCompatActivity implements V
                 }
                 intent.putExtras(args);
                 startActivityForResult(intent, TYPE);
+                overridePendingTransition(0,0);
+                break;
             }
             default: {
                 if (isInfoUpdated) {

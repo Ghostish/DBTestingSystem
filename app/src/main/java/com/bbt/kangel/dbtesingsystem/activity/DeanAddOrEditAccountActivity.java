@@ -1,12 +1,16 @@
 package com.bbt.kangel.dbtesingsystem.activity;
 
+import android.animation.ObjectAnimator;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -105,8 +109,8 @@ public class DeanAddOrEditAccountActivity extends AppCompatActivity implements V
                 Intent intent = new Intent();
                 Bundle args = new Bundle();
                 args.putString("NAME", nameEdit.getText().toString());
-                if (majorEdit!=null) {
-                    args.putString("MAJOR",majorEdit.getText().toString());
+                if (majorEdit != null) {
+                    args.putString("MAJOR", majorEdit.getText().toString());
                 }
                 intent.putExtras(args);
                 setResult(RESULT_OK, intent);
@@ -116,6 +120,7 @@ public class DeanAddOrEditAccountActivity extends AppCompatActivity implements V
             }
         }
     }
+
 
     private void initView() {
         setContentView(R.layout.activity_dean_add_people_info);

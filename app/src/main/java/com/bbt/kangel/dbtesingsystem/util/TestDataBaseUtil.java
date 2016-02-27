@@ -52,9 +52,9 @@ public class TestDataBaseUtil {
     }
 
     public static Cursor getQuestionUnmarked(SQLiteDatabase db, String sno, String pid) {
-        return db.rawQuery("select gapQuestion.CONTENT CONTENT,gapAnswers.ANSWER ANSWER,gapInPapers.SCORE SCORE,gapAnswers.QID QID, 1 TYPE from gapQuestion,gapAnswers,gapInPapers where ISMARKED = 0 and  gapAnswers.PID = ? and gapAnswers.SNO = ? and gapQuestion.QID = gapAnswers.QID and gapInPapers.QID = gapAnswers.QID \n" +
+        return db.rawQuery("select gapQuestion.CONTENT CONTENT,gapAnswers.ANSWER ANSWER,gapInPapers.SCORE SCORE,gapAnswers.QID QID, 1 TYPE from gapQuestion,gapAnswers,gapInPapers where ISMARKED = 0 and  gapAnswers.PID = ? and gapAnswers.SNO = ? and gapQuestion.QID = gapAnswers.QID and gapInPapers.PID = gapAnswers.PID and gapInPapers.QID = gapAnswers.QID \n" +
                 "union\n" +
-                " select essayQuestion.CONTENT CONTENT,essayAnswers.ANSWER ANSWER,essayInPapers.SCORE SCORE,essayAnswers.QID QID,2 TYPE from essayQuestion,essayAnswers,essayInPapers where  ISMARKED = 0 and essayAnswers.PID = ? and essayAnswers.SNO = ? and essayQuestion.QID = essayAnswers.QID and essayInPapers.QID = essayAnswers.QID\n", new String[]{pid, sno, pid, sno});
+                " select essayQuestion.CONTENT CONTENT,essayAnswers.ANSWER ANSWER,essayInPapers.SCORE SCORE,essayAnswers.QID QID,2 TYPE from essayQuestion,essayAnswers,essayInPapers where  ISMARKED = 0 and essayAnswers.PID = ? and essayAnswers.SNO = ? and essayQuestion.QID = essayAnswers.QID  and essayInPapers.PID = essayAnswers.PID\n", new String[]{pid, sno, pid, sno});
     }
 
     public static Cursor getQuestionCount(SQLiteDatabase db) {

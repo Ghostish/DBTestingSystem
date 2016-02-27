@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
@@ -29,7 +30,12 @@ public class StudentViewGradeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
         recyclerView.setHasFixedSize(true);

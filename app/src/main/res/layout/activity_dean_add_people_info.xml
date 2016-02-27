@@ -31,20 +31,92 @@
         android:layout_height="5dp"
         android:background="@drawable/toolbar_shadow" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/account_info_card"
+    <LinearLayout
+        android:layoutAnimation="@anim/layout_card_enter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardBackgroundColor="@color/lighter_background"
-        app:cardCornerRadius="4dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="8dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/account_info_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="4dp"
+            app:cardBackgroundColor="@color/lighter_background"
+            app:cardCornerRadius="4dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:foreground="?android:selectableItemBackground">
+
+                    <ImageView
+                        android:id="@+id/info_icon"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.54"
+                        android:cropToPadding="true"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/account" />
+
+
+                    <EditText
+                        android:id="@+id/name_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/info_icon"
+                        android:layout_toRightOf="@+id/info_icon"
+                        android:hint="@string/label_name_without_colon"
+                        android:minEms="10"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="?android:textColorPrimary" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:foreground="?android:selectableItemBackground">
+
+
+                    <EditText
+                        android:id="@+id/id_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="64dp"
+                        android:layout_marginStart="64dp"
+                        android:hint="@string/label_sno_or_tno"
+                        android:inputType="numberDecimal"
+                        android:minEms="10"
+                        android:textAppearance="?android:textAppearanceMedium" />
+
+
+                </RelativeLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/major_info_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/lighter_background"
+            app:cardCornerRadius="4dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -52,137 +124,73 @@
                 android:foreground="?android:selectableItemBackground">
 
                 <ImageView
-                    android:id="@+id/info_icon"
+                    android:id="@+id/major_icon"
                     android:layout_width="48dp"
                     android:layout_height="wrap_content"
                     android:alpha="0.54"
                     android:cropToPadding="true"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/account" />
+                    android:src="@mipmap/major" />
 
 
                 <EditText
-                    android:id="@+id/name_edit"
+                    android:id="@+id/major_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/info_icon"
-                    android:layout_toRightOf="@+id/info_icon"
-                    android:hint="@string/label_name_without_colon"
+                    android:layout_toEndOf="@+id/major_icon"
+                    android:layout_toRightOf="@+id/major_icon"
+                    android:hint="@string/label_major"
                     android:minEms="10"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="?android:textColorPrimary" />
 
-
             </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/password_info_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:cardBackgroundColor="@color/lighter_background"
+            app:cardCornerRadius="4dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:foreground="?android:selectableItemBackground">
 
+                <ImageView
+                    android:id="@+id/password_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.54"
+                    android:cropToPadding="true"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/password" />
 
                 <EditText
-                    android:id="@+id/id_edit"
+                    android:id="@+id/password_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="64dp"
-                    android:layout_marginStart="64dp"
-                    android:hint="@string/label_sno_or_tno"
-                    android:inputType="numberDecimal"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/password_icon"
+                    android:layout_toRightOf="@+id/password_icon"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword"
                     android:minEms="10"
-                    android:textAppearance="?android:textAppearanceMedium" />
-
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="?android:textColorPrimary" />
 
             </RelativeLayout>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/major_info_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:visibility="gone"
-        app:cardBackgroundColor="@color/lighter_background"
-        app:cardCornerRadius="4dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="8dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:foreground="?android:selectableItemBackground">
-
-            <ImageView
-                android:id="@+id/major_icon"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:alpha="0.54"
-                android:cropToPadding="true"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/major" />
-
-
-            <EditText
-                android:id="@+id/major_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@+id/major_icon"
-                android:layout_toRightOf="@+id/major_icon"
-                android:hint="@string/label_major"
-                android:minEms="10"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="?android:textColorPrimary" />
-
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/password_info_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardBackgroundColor="@color/lighter_background"
-        app:cardCornerRadius="4dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="8dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:foreground="?android:selectableItemBackground">
-
-            <ImageView
-                android:id="@+id/password_icon"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:alpha="0.54"
-                android:cropToPadding="true"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/password" />
-
-            <EditText
-                android:id="@+id/password_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@+id/password_icon"
-                android:layout_toRightOf="@+id/password_icon"
-                android:hint="@string/hint_password"
-                android:inputType="textPassword"
-                android:minEms="10"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="?android:textColorPrimary" />
-
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
 </LinearLayout>

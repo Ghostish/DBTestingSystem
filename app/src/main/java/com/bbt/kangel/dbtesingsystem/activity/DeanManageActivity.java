@@ -176,12 +176,14 @@ public class DeanManageActivity extends AppCompatActivity implements View.OnClic
                     bundle.putInt("TYPE", GlobalKeeper.TYPE_STUDENT);
                     intent.putExtras(bundle);
                     startActivityForResult(intent, DeanAddOrEditAccountActivity.MODE_ADD);
+                    overridePendingTransition(0,0);
                     break;
                 }
                 case 1:
                     bundle.putInt("TYPE", GlobalKeeper.TYPE_TEACHER);
                     intent.putExtras(bundle);
                     startActivityForResult(intent, DeanAddOrEditAccountActivity.MODE_ADD);
+                    overridePendingTransition(0,0);
                     break;
             }
         }

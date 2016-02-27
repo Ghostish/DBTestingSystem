@@ -29,9 +29,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             "create view grades as\n" +
                     "select SNO,PID,sum(SUMSCORE) GRADE from \n" +
                     "(select SNO,PID,SUMSCORE from gapScore \n" +
-                    "union\n" +
+                    "union all\n" +
                     "select SNO,PID,SUMSCORE from essayScore\n" +
-                    "union\n" +
+                    "union all\n" +
                     "select SNO,PID,SUMSCORE from choiceScore)\n" +
                     "group by SNO,PID"};
     static final String INSERT_STUDENTS = "insert into students values\n" +

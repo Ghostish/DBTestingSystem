@@ -109,4 +109,5 @@
     <string name="add_account_failed">添加失败，请检查数据是否合法</string>
     <string name="edit_account_successfully">修改成功</string>
     <string name="edit_account_failed">修改失败，请检查条目再重试</string>
+    <string name="empty_string_no_unmarked">暂无待批改考卷</string>
 </resources>
