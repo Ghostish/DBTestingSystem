@@ -8,7 +8,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
@@ -17,6 +16,7 @@ import android.view.View;
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.adapter.ViewPaperListAdapter;
 import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
+import com.bbt.kangel.dbtesingsystem.util.EmptyViewRecyclerView;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.ItemTouchHelperActivity;
 import com.bbt.kangel.dbtesingsystem.util.RecyclerViewActivity;
@@ -46,7 +46,7 @@ public class TeacherManagePaperActivity extends AppCompatActivity implements Vie
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(this);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
+        EmptyViewRecyclerView recyclerView = (EmptyViewRecyclerView) findViewById(R.id.recycle_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(TeacherManagePaperActivity.this));
         DataBaseHelper helper = new DataBaseHelper(TeacherManagePaperActivity.this, GlobalKeeper.DB_NAME, 1);
@@ -54,6 +54,7 @@ public class TeacherManagePaperActivity extends AppCompatActivity implements Vie
         c = TestDataBaseUtil.getPaperList(db, null);
         adapter = new ViewPaperListAdapter(TeacherManagePaperActivity.this, c);
         recyclerView.setAdapter(adapter);
+        recyclerView.setEmptyView(findViewById(R.id.empty_view));
 
         SimpleItemTouchHelperCallback callback = new SimpleItemTouchHelperCallback(TeacherManagePaperActivity.this);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
@@ -102,7 +103,7 @@ public class TeacherManagePaperActivity extends AppCompatActivity implements Vie
     }
 
     @Override
-    public void onRecyclerViewItemSelect(Bundle args, String tag,int position) {
+    public void onRecyclerViewItemSelect(Bundle args, String tag, int position) {
         Intent intent = new Intent(TeacherManagePaperActivity.this, TeacherViewPaperDetailActivity.class);
         intent.putExtras(args);
         startActivity(intent);
@@ -147,7 +148,7 @@ public class TeacherManagePaperActivity extends AppCompatActivity implements Vie
         public void onClick(View v) {
             deleteList.remove(deleteList.size() - 1);
             c.close();
-            c = TestDataBaseUtil.getPaperList(db,getNotInClause());
+            c = TestDataBaseUtil.getPaperList(db, getNotInClause());
             adapter.updateCursor(c);
             adapter.notifyItemInserted(position);
         }

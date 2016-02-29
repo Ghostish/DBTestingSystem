@@ -8,7 +8,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
@@ -19,6 +18,7 @@ import com.bbt.kangel.dbtesingsystem.adapter.PeopleListAdapter;
 import com.bbt.kangel.dbtesingsystem.fragment.ChooseItemDialogFragment;
 import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
 import com.bbt.kangel.dbtesingsystem.util.DialogActivity;
+import com.bbt.kangel.dbtesingsystem.util.EmptyViewRecyclerView;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.ItemTouchHelperActivity;
 import com.bbt.kangel.dbtesingsystem.util.RecyclerViewActivity;
@@ -56,10 +56,11 @@ public class DeanManageActivity extends AppCompatActivity implements View.OnClic
         db = helper.getReadableDatabase();
         cursor = TestDataBaseUtil.getPeopleList(db, null);
         adapter = new PeopleListAdapter(DeanManageActivity.this, cursor);
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recycle_view);
+        EmptyViewRecyclerView rv = (EmptyViewRecyclerView) findViewById(R.id.recycle_view);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
+        rv.setEmptyView(findViewById(R.id.empty_view));
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(DeanManageActivity.this);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
@@ -176,14 +177,14 @@ public class DeanManageActivity extends AppCompatActivity implements View.OnClic
                     bundle.putInt("TYPE", GlobalKeeper.TYPE_STUDENT);
                     intent.putExtras(bundle);
                     startActivityForResult(intent, DeanAddOrEditAccountActivity.MODE_ADD);
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     break;
                 }
                 case 1:
                     bundle.putInt("TYPE", GlobalKeeper.TYPE_TEACHER);
                     intent.putExtras(bundle);
                     startActivityForResult(intent, DeanAddOrEditAccountActivity.MODE_ADD);
-                    overridePendingTransition(0,0);
+                    overridePendingTransition(0, 0);
                     break;
             }
         }

@@ -6,16 +6,15 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.bbt.kangel.dbtesingsystem.R;
+import com.bbt.kangel.dbtesingsystem.adapter.StudentViewGradeAdapter;
+import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
+import com.bbt.kangel.dbtesingsystem.util.EmptyViewRecyclerView;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.TestDataBaseUtil;
-import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
-
-import com.bbt.kangel.dbtesingsystem.adapter.StudentViewGradeAdapter;
 
 /**
  * Created by Kangel on 2015/12/15.
@@ -37,7 +36,7 @@ public class StudentViewGradeActivity extends AppCompatActivity {
             }
         });
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
+        EmptyViewRecyclerView recyclerView = (EmptyViewRecyclerView) findViewById(R.id.recycle_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -47,6 +46,7 @@ public class StudentViewGradeActivity extends AppCompatActivity {
         cursor = TestDataBaseUtil.getGradeDetail(db, SNO);
         StudentViewGradeAdapter adapter = new StudentViewGradeAdapter(this, cursor);
         recyclerView.setAdapter(adapter);
+        recyclerView.setEmptyView(findViewById(R.id.empty_view));
     }
 
     @Override

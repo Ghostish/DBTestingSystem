@@ -8,7 +8,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.adapter.ViewQuestionListAdapter;
 import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
+import com.bbt.kangel.dbtesingsystem.util.EmptyViewRecyclerView;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.ItemTouchHelperActivity;
 import com.bbt.kangel.dbtesingsystem.util.SimpleItemTouchHelperCallback;
@@ -70,11 +70,12 @@ public class TeacherViewQuestionDetailActivity extends AppCompatActivity impleme
         db = helper.getWritableDatabase();
         cursor = TestDataBaseUtil.getQuestionByTYPE(db, viewType, null);
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recycle_view);
+        EmptyViewRecyclerView rv = (EmptyViewRecyclerView) findViewById(R.id.recycle_view);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ViewQuestionListAdapter(TeacherViewQuestionDetailActivity.this, cursor, false, false);
         rv.setAdapter(adapter);
+        rv.setEmptyView(findViewById(R.id.empty_view));
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(TeacherViewQuestionDetailActivity.this);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);

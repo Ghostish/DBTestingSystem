@@ -5,13 +5,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.bbt.kangel.dbtesingsystem.R;
 import com.bbt.kangel.dbtesingsystem.adapter.ViewQuestionListAdapter;
 import com.bbt.kangel.dbtesingsystem.util.DataBaseHelper;
+import com.bbt.kangel.dbtesingsystem.util.EmptyViewRecyclerView;
 import com.bbt.kangel.dbtesingsystem.util.GlobalKeeper;
 import com.bbt.kangel.dbtesingsystem.util.TestDataBaseUtil;
 
@@ -39,7 +39,7 @@ public class TeacherViewPaperDetailActivity extends AppCompatActivity implements
         toolbar.setTitle(R.string.title_view_paper_detail);
         toolbar.setNavigationOnClickListener(this);
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recycle_view);
+        EmptyViewRecyclerView rv = (EmptyViewRecyclerView) findViewById(R.id.recycle_view);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this));
         DataBaseHelper helper = new DataBaseHelper(TeacherViewPaperDetailActivity.this, GlobalKeeper.DB_NAME, 1);
@@ -47,6 +47,7 @@ public class TeacherViewPaperDetailActivity extends AppCompatActivity implements
         cursor = TestDataBaseUtil.getQuestionsByPID(db, PID);
         ViewQuestionListAdapter adapter = new ViewQuestionListAdapter(TeacherViewPaperDetailActivity.this, cursor, false, true);
         rv.setAdapter(adapter);
+        rv.setEmptyView(findViewById(R.id.empty_view));
 
     }
 
