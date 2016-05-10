@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bbt.kangel.dbtesingsystem"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="23" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.bbt.kangel.dbtesingsystem.activity.LoginActivity"
+            android:theme="@style/AppTheme.LoginTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.StudentMainActivity" >
+        </activity>
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.StudentViewGradeActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TeacherMainActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.DeanMainActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TestActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TeacherChooseUnmarkedActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TeacherMarkActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TeacherViewGradeActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.DeanManageActivity" />
+        <activity
+            android:name="com.bbt.kangel.dbtesingsystem.activity.ShowStatisticsActivity"
+            android:theme="@style/DialogStyle" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TeacherManagePaperActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TeacherManageQuestionActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TeacherViewPaperDetailActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TeacherViewQuestionDetailActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TeacherAddNewTextQuestionActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TeacherAddChoiceQuestionActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.TeacherAddPaperActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.DeanViewPeopleDetailActivity" />
+        <activity android:name="com.bbt.kangel.dbtesingsystem.activity.DeanAddOrEditAccountActivity" />
+    </application>
+
+</manifest>

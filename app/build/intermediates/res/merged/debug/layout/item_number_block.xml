@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/num_holder"
+    android:layout_width="match_parent"
+    android:layout_height="20dp"
+    android:background="@color/lightGrey"
+    android:gravity="center"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="1"
+        android:background="?android:selectableItemBackground"
+        android:textColor="?android:textColorPrimary"
+        android:id="@+id/question_num"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+</LinearLayout>

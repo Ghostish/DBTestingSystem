@@ -1,0 +1,338 @@
+[
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_pick_question.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\fragment_pick_question.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_test_essay.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\fragment_test_essay.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_test_choice.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\fragment_test_choice.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_view_list.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_view_list.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_dialog_choose_question.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\fragment_dialog_choose_question.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_navigation_item.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_mark.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\fragment_mark.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_menu_item_action_area.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_menu_item_action_area.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_test_gap.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\fragment_test_gap.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_add_paper_scheme.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\fragment_add_paper_scheme.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_teacher_view_question_abstract.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_teacher_view_question_abstract.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_teacher_add_wrapper_layout.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_teacher_add_wrapper_layout.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_grade_list_teacher.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\item_grade_list_teacher.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_add_question_content.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\fragment_add_question_content.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_paper_info.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\item_paper_info.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dean_view_people_detail.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_dean_view_people_detail.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_text.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_layout_tab_text.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_teacher_info.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\item_teacher_info.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_bottom_sheet_dialog.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_student_main.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_student_main.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_student_info.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\item_student_info.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_view_gap_essay_question.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\item_view_gap_essay_question.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_add_text_answer.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\fragment_add_text_answer.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_teacher_view_grade.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_teacher_view_grade.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_search_view.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_teacher_view_unmarked_paper.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_teacher_view_unmarked_paper.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_teacher_main.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_teacher_main.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_view_choice_question.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\item_view_choice_question.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_layout_snackbar.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_add_choices.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\fragment_add_choices.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dean_main.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_dean_main.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_marking.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_marking.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_view_list_with_fab.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_view_list_with_fab.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_on_test.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_on_test.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_number_block.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\item_number_block.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\notification_template_media.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_login_layout.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_login_layout.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar_include.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_layout_snackbar_include.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\notification_template_lines.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\notification_template_big_media.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_action.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\notification_media_action.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu_item.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_statistics.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_statistics.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_header.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_navigation_item_header.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_grade_list_student.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\item_grade_list_student.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_teacher_add_text_question.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_teacher_add_text_question.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dean_add_people_info.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\activity_dean_add_people_info.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.2.0\\res\\layout\\design_navigation_menu.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_dialog_choose_paper.xml",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\layout\\fragment_dialog_choose_paper.xml"
+    }
+]

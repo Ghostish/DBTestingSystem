@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lighter_background"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:title="">
+
+        <ImageButton
+            android:id="@+id/logout_button"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="end"
+            android:background="@color/transparent"
+            android:contentDescription="@null"
+            android:onClick="onClick"
+            android:src="@drawable/ic_tap_logout" />
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/toolbar_shadow" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="郑超达老师："
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/welcome_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:layout_centerHorizontal="true"
+            android:minWidth="200dp"
+            android:text="@string/welcome"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:id="@+id/button_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layoutAnimation="@anim/layout_button_enter"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/mark_papers"
+                android:layout_width="150dp"
+                android:layout_height="48dp"
+                android:onClick="onClick"
+                android:text="@string/mark_papers"
+                android:textColor="?android:textColorPrimaryInverse"
+                app:backgroundTint="@color/BlueColorPrimary" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/show_result"
+                android:layout_width="150dp"
+                android:layout_height="48dp"
+                android:onClick="onClick"
+                android:text="@string/show_result"
+                android:textColor="?android:textColorPrimaryInverse"
+                app:backgroundTint="@color/BlueColorPrimary" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/paper_management"
+                android:layout_width="150dp"
+                android:layout_height="48dp"
+                android:onClick="onClick"
+                android:text="@string/paper_management"
+                android:textColor="?android:textColorPrimaryInverse"
+                app:backgroundTint="@color/BlueColorPrimary" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

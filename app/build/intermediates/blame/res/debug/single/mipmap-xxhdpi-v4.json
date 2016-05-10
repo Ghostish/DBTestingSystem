@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\major.png",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\mipmap-xxhdpi\\major.png"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\gap.png",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\mipmap-xxhdpi\\gap.png"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\choice.png",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\mipmap-xxhdpi\\choice.png"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\teacher_head_show.png",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\mipmap-xxhdpi\\teacher_head_show.png"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\student_pencil.png",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\mipmap-xxhdpi\\student_pencil.png"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\ic_launcher.png",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\essay.png",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\mipmap-xxhdpi\\essay.png"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\password.png",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\mipmap-xxhdpi\\password.png"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\account.png",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\mipmap-xxhdpi\\account.png"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\student_head_show.png",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\mipmap-xxhdpi\\student_head_show.png"
+    },
+    {
+        "merged": "G:\\CD\\android_project\\DBTesingSystem\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\teacher_lamp.png",
+        "source": "G:\\CD\\android_project\\DBTesingSystem\\app\\src\\main\\res\\mipmap-xxhdpi\\teacher_lamp.png"
+    }
+]
