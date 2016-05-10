@@ -38,46 +38,18 @@
 
 # 部分APP内截图：  
 
-![login]  
 
-![testing1]  
-
-![testing2]  
-
-![marking]  
-
-![viewGrade]  
-
-![statistics]  
-
-![filter]  
-
-![viewQuestions]
-
-![newQuestion1]
-
-![newQuestion2]
-
-![newPaper1]
-
-![newPaper2]
-
-![viewProfile]
-
-![editProfile]
-
-
-[login]: /screenshot/login.png
-[testing1]: /screenshot/testing1.png
-[testing2]: /screenshot/testing2.png
-[marking]: /screenshot/marking.png
-[viewGrade]: /screenshot/viewgrade.png
-[statistics]: /screenshot/statistics.png
-[filter]: /screenshot/filter.png
-[viewQuestions]: /screenshot/viewQuestions.png
-[newQuestion1]: /screenshot/newQuestion1.png
-[newQuestion2]: /screenshot/newQuestion2.png
-[newPaper1]: /screenshot/newPaper1.png
-[newPaper2]: /screenshot/newPaper2.png
-[viewProfile]: /screenshot/viewProfile.png
-[editProfile]: /screenshot/editProfile.png
+<img src="./screenshot/login.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/testing1.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/testing2.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/marking.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/viewGrade.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/statistics.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/filter.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/viewQuestions.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/newQuestion1.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/newQuestion2.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/newPaper1.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/newPaper2.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/viewProfile.png" height="640px" width="360px"/><br/>
+<img src="./screenshot/editProfile.png" height="640px" width="360px"/><br/>
