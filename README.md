@@ -35,6 +35,7 @@
 
 -----------------------------------
 
+<<<<<<< HEAD
 # 部分APP内截图：  
 
 ![ALT text][login]  
@@ -80,3 +81,5 @@
 [newPaper2]: /screenshot/newPaper2
 [viewProfile]: /screenshot/viewProfile
 [editProfile]: /screenshot/editProfile
+=======
+>>>>>>> 0bcc1948c759a5187b3ae1384bcb15f9a8d9f0be
