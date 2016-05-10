@@ -1,5 +1,6 @@
 # DBTestingSystem-for-Android
 
+### Diablo Teaches Science : DBTestingSystem 一个突发奇想的名字
 一个基于**Android**平台的数据库考试系统  
 
 具有角色:
@@ -35,39 +36,38 @@
 
 -----------------------------------
 
-<<<<<<< HEAD
 # 部分APP内截图：  
 
-![ALT text][login]  
+![login]  
 
-![ALT text][testing1]  
+![testing1]  
 
-![ALT text][testing2]  
+![testing2]  
 
-![ALT text][marking]  
+![marking]  
 
-![ALT text][viewGrade]  
+![viewGrade]  
 
-![ALT text][statistics]  
+![statistics]  
 
-![ALT text][filter]  
+![filter]  
 
-![ALT text][viewQuestions]
+![viewQuestions]
 
-![ALT text][newQuestion1]
+![newQuestion1]
 
-![ALT text][newQuestion2]
+![newQuestion2]
 
-![ALT text][newPaper1]
+![newPaper1]
 
-![ALT text][newPaper2]
+![newPaper2]
 
-![ALT text][viewProfile]
+![viewProfile]
 
-![ALT text][editProfile]
+![editProfile]
 
 
-[login]: /sreenshot/login.png
+[login]: /screenshot/login.png
 [testing1]: /screenshot/testing1.png
 [testing2]: /screenshot/testing2.png
 [marking]: /screenshot/marking.png
@@ -75,11 +75,9 @@
 [statistics]: /screenshot/statistics.png
 [filter]: /screenshot/filter.png
 [viewQuestions]: /screenshot/viewQuestions.png
-[newQuestion1]: /screenshot/newQuestion1
-[newQuestion2]: /screenshot/newQuestion2
-[newPaper1]: /screenshot/newPaper1
-[newPaper2]: /screenshot/newPaper2
-[viewProfile]: /screenshot/viewProfile
-[editProfile]: /screenshot/editProfile
-=======
->>>>>>> 0bcc1948c759a5187b3ae1384bcb15f9a8d9f0be
+[newQuestion1]: /screenshot/newQuestion1.png
+[newQuestion2]: /screenshot/newQuestion2.png
+[newPaper1]: /screenshot/newPaper1.png
+[newPaper2]: /screenshot/newPaper2.png
+[viewProfile]: /screenshot/viewProfile.png
+[editProfile]: /screenshot/editProfile.png
